@@ -63,7 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Debug.cs" />
     <Compile Include="ExtraMethods.cs" />
     <Compile Include="ObjectClasses.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -89,6 +88,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="m29.TTF" />
+    <Resource Include="Pixel_NES.otf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

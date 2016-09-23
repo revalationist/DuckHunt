@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Timers;
 
 // Transformation methods and such to make my life easier.
+// Scale factor 3
 
 namespace Duck_Hunt
 {

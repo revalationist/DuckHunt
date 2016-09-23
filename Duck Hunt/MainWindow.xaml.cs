@@ -18,19 +18,6 @@ namespace Duck_Hunt
             
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            Sprite s = new Sprite(
-                new Image()
-                {
-                    Source = new BitmapImage(
-                        new Uri(@"F:\Users\jay0\Desktop\the people.PNG")
-                        )
-                },
-                
-                this.Main_Menu);
-
-            
-        }
+        
     }
 }
