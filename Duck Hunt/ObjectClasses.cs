@@ -27,11 +27,13 @@ namespace Duck_Hunt
         void Resize(Tuple<int, int> change);
     }*/
     
-        // These interfaces were used to implement mandatory methods, until I realized I could use accessors for the same purpose. 
+        // These interfaces were used to implement mandatory methods,
+        // but the only mandatory methods were soon replaced by acessors.
+        // Seeing as you can't define fields in an interface, they were deprecated.
 
 
 
-    class GameImageObj
+    public abstract class GameImageObj
     {
         public MainWindow instance { get; private set; }
         public Image img { get; set; }
@@ -50,11 +52,7 @@ namespace Duck_Hunt
                 Panel.SetZIndex(this.img, priority);
             }
         }
-  
 
-        
-
-        
 
         public Tuple<int, int> position
         {
@@ -91,7 +89,7 @@ namespace Duck_Hunt
         {
             this.img = i;
             parent.Children.Add(img);
-            this.instance = parent.Parent as MainWindow; 
+            Window instance = Window.GetWindow(parent);
         }
     }
 
@@ -152,7 +150,7 @@ namespace Duck_Hunt
         }
     }
 
-    class Sprite : GameImageObj
+    public abstract class Sprite : GameImageObj
     {
         public MouseButtonEventHandler onClick
         {
@@ -199,7 +197,16 @@ namespace Duck_Hunt
             this.onClick = eventHandler;
         }
 
-    }
+    }// This class is a bit useless because the AISprite class (which inherits from it) is used for any scenario in which this would be useful
+    // That said, if I just had AISprite built on from GameImageObj it'd be less structured and readable.
+    // It just so happens that in this particular game, Duck Hunt, there are no objects that have to move but in a simple way.
+    // The ducks all need their own pathfinding and dead/alive states, and the dog needs animations.
+    // If there was, say, an image that changed with user input in a non-complex fashion, the Sprite class could be used in lieu of an AISprite
+    // as the logic there is not complicated enough to warrant a timer with modular AI functions and death functions.
+    // 
+    // In summary, it's abstract seeing as it's only used to derive the AISprite class, ever, due to the nature of the game.
+    // That is, there are only two moving objects and both require complex AI so need custom methods.
+
 
     class AISprite : Sprite
     {
