@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:Duck_Hunt"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
-    <Canvas>
+    <Canvas x:Name="Main_Menu">
         <Canvas.Background>
-            <SolidColorBrush Color="Black">
-                
-            </SolidColorBrush></Canvas.Background>
+            <SolidColorBrush Color="Black"></SolidColorBrush></Canvas.Background>
     </Canvas>
 </Window>

@@ -46,7 +46,7 @@ namespace Duck_Hunt
             set
             {
                 priority = priority + value;
-                Canvas.SetZIndex(this.img, priority);
+                Panel.SetZIndex(this.img, priority);
             }
         }
   
