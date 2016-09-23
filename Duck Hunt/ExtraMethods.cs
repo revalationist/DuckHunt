@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
+
 namespace Duck_Hunt
 {
     public static class ExtraMethods
     {
+
         public static Tuple<int, int> TupleSum(Tuple<int, int> a, Tuple<int, int> b)
         {
             return new Tuple<int, int>(

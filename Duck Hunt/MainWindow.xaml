@@ -6,18 +6,49 @@
         xmlns:local="clr-namespace:Duck_Hunt"
         mc:Ignorable="d"
         Title="MainWindow" Height="721" Width="769" ResizeMode="NoResize">
-    <Canvas x:Name="Main_Menu">
+
+
+    <!--<Canvas x:Name="Main_Menu">
         <Canvas.Background>
             <SolidColorBrush Color="Black"></SolidColorBrush>
         </Canvas.Background>
         <Label x:Name="label_DUCK"  Content="DUCK" HorizontalContentAlignment="Center" Height="135" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="-35" Canvas.Top="10"/>
         <Label x:Name="label_HUNT"  Content="HUNT" HorizontalContentAlignment="Center" Height="146" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="89" Canvas.Top="161"/>
         <Rectangle Fill="#EA9E24" Height="6" Canvas.Left="112" Stroke="Black" Canvas.Top="150" Width="568"/>
-        <Label x:Name="label_GAME1" HorizontalContentAlignment="Center" Content="GAME A     1 DUCK" Canvas.Top="312" Foreground="#EA9E24" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24"/>
-        <Label x:Name="label_GAME2"  Content="GAME B     2 DUCKS" Canvas.Top="365" Foreground="#EA9E24" Width="545" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218"/>
-        <Label x:Name="label_GAME3"  Content="GAME C     CLAY SHOOTING" Canvas.Top="418" Foreground="#EA9E24" Width="545" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218"/>
-        <Label x:Name="label_HIGHSCORE" HorizontalContentAlignment="Center" Content="TOP SCORE = 000000" Canvas.Top="495" Foreground="#FF4CDC48" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="36"/>
+        <Label x:Name="label_GAME1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="GAME A     1 DUCK" Canvas.Top="312" Foreground="#EA9E24" Width="350" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave" Canvas.Left="204"/>
+        <Label x:Name="label_GAME2"  Content="GAME B     2 DUCKS" Canvas.Top="365" Foreground="#EA9E24" Width="346" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave"/>
+        <Label x:Name="label_GAME3"  Content="GAME C     CLAY SHOOTING" Canvas.Top="418" Foreground="#EA9E24" Width="453" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave"/>
+        <Label x:Name="label_HIGHSCORE" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="TOP SCORE = 000000" Canvas.Top="495" Foreground="#FF4CDC48" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="36"/>
         <Label x:Name="label_HIGHSCORE_Copy" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Content=" ©1984 NINTENDO CO., LTD. " Canvas.Top="552" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="28"/>
         <Label x:Name="label_HIGHSCORE_Copy1" HorizontalContentAlignment="Center"  Content="REMADE UNDER FAIR USE by jay malhotra, 2016" Canvas.Top="595" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="14" Height="77"/>
+    </Canvas>-->
+
+    <Canvas x:Name="GameBG">
+        <Canvas.Background>
+            <SolidColorBrush x:Name="bg" Color="SkyBlue"></SolidColorBrush>
+        </Canvas.Background>
+
+
+        <Rectangle Fill="#005100" Height="54" Canvas.Left="585" Canvas.Top="430" Width="110" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.75"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Image x:Name="ground"   Height="296" Canvas.Top="459" Width="763" Source="grnd.png"/>
+
+        <Image x:Name="tree"  Canvas.Top="40"  Source="tree.png" Canvas.Left="10"/>
+        <Image x:Name="bush"  Canvas.Left="575" Canvas.Top="326" Source="bush.png"/>
+        <Image x:Name="grass"  Canvas.Top="420"  Source="reeds.png" Canvas.Left="-30"/>
+
+
+
+
     </Canvas>
+
+
 </Window>
