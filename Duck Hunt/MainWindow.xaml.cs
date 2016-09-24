@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -51,16 +52,18 @@ namespace Duck_Hunt
                 MakeTuple(28, 31)
             );
 
-            AiSprite duck = new AiSprite(
+            AISprite duck = new AISprite(
                 duckSrc,
                 DuckClick,
                 GameBg,
                 Behaviour.Duck,
-                100000000
+                100000 // ms
             );
 
-            duck.Position = MakeTuple(100, 100);
-            duck.Resize(2);
+
+            //duck.Position = MakeTuple(100, 100);
+            
+            //duck.Move(MakeTuple(400, 400));
         }
 
         private static Tuple<int, int> MakeTuple(int a, int b) // Shorthand for creating int, int tuples

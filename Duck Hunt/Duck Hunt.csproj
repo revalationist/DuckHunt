@@ -120,7 +120,7 @@
     <Resource Include="bush.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="sheet.gif" />
+    <Resource Include="sheet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
