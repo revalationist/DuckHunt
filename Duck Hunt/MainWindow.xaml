@@ -1,4 +1,4 @@
-﻿<Window x:Name="Duck_Hunt" x:Class="Duck_Hunt.MainWindow"
+﻿<Window x:Name="DuckHunt" x:Class="Duck_Hunt.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,24 +9,24 @@
         Title="MainWindow" Height="721" Width="769" ResizeMode="NoResize">
 
     <Grid>
-        <Canvas x:Name="Main_Menu">
+        <Canvas x:Name="MainMenu">
             <Canvas.Background>
                 <SolidColorBrush Color="Black"></SolidColorBrush>
             </Canvas.Background>
-            <Label x:Name="label_DUCK"  Content="DUCK" HorizontalContentAlignment="Center" Height="135" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="-35" Canvas.Top="10"/>
-            <Label x:Name="label_HUNT"  Content="HUNT" HorizontalContentAlignment="Center" Height="146" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="89" Canvas.Top="161"/>
+            <Label x:Name="LabelDuck"  Content="DUCK" HorizontalContentAlignment="Center" Height="135" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="-35" Canvas.Top="10"/>
+            <Label x:Name="LabelHunt"  Content="HUNT" HorizontalContentAlignment="Center" Height="146" Width="763" FontFamily="/Duck Hunt;component/#M29_DUCK HOUND" Foreground="#FF48CDDE" FontSize="120" Canvas.Left="89" Canvas.Top="161"/>
             <Rectangle Fill="#EA9E24" Height="6" Canvas.Left="112" Stroke="Black" Canvas.Top="150" Width="568"/>
-            <Label x:Name="label_GAME1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="GAME A     1 DUCK" Canvas.Top="312" Foreground="#EA9E24" Width="350" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave" Canvas.Left="204" MouseDown="enterGame1"/>
-            <Label x:Name="label_GAME2"  Content="GAME B     2 DUCKS" Canvas.Top="365" Foreground="#EA9E24" Width="346" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave" MouseDown="enterGame2"/>
-            <Label x:Name="label_GAME3"  Content="GAME C     CLAY SHOOTING" Canvas.Top="418" Foreground="#EA9E24" Width="453" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="menuOptionMEnter" MouseLeave="menuOptionMLeave" MouseDown="enterGame3"/>
-            <Label x:Name="label_HIGHSCORE" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="TOP SCORE = 000000" Canvas.Top="495" Foreground="#FF4CDC48" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="36"/>
-            <Label x:Name="label_HIGHSCORE_Copy" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Content=" ©1984 NINTENDO CO., LTD. " Canvas.Top="552" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="28"/>
-            <Label x:Name="label_HIGHSCORE_Copy1" HorizontalContentAlignment="Center"  Content="REMADE UNDER FAIR USE by jay malhotra, 2016" Canvas.Top="595" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="14" Height="77"/>
+            <Label x:Name="LabelGame1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="GAME A     1 DUCK" Canvas.Top="312" Foreground="#EA9E24" Width="350" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" MouseEnter="MenuOptionMEnter" MouseLeave="MenuOptionMLeave" Canvas.Left="204" MouseDown="EnterGame1"/>
+            <Label x:Name="LabelGame2"  Content="GAME B     2 DUCKS" Canvas.Top="365" Foreground="#EA9E24" Width="346" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="MenuOptionMEnter" MouseLeave="MenuOptionMLeave" MouseDown="EnterGame2"/>
+            <Label x:Name="LabelGame3"  Content="GAME C     CLAY SHOOTING" Canvas.Top="418" Foreground="#EA9E24" Width="453" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="24" Canvas.Left="218" MouseEnter="MenuOptionMEnter" MouseLeave="MenuOptionMLeave" MouseDown="EnterGame3"/>
+            <Label x:Name="LabelHighscore" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="TOP SCORE = 000000" Canvas.Top="495" Foreground="#FF4CDC48" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="36"/>
+            <Label x:Name="LabelHighscoreCopy" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Content=" ©1984 NINTENDO CO., LTD. " Canvas.Top="552" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="28"/>
+            <Label x:Name="LabelHighscoreCopy1" HorizontalContentAlignment="Center"  Content="REMADE UNDER FAIR USE by jay malhotra, 2016" Canvas.Top="595" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/#Pixel NES" FontSize="14" Height="77"/>
         </Canvas>
 
-        <Canvas x:Name="GameBG">
+        <Canvas x:Name="GameBg">
             <Canvas.Background>
-                <SolidColorBrush x:Name="bg" Color="SkyBlue"></SolidColorBrush>
+                <SolidColorBrush x:Name="Bg" Color="#3FBFFF"></SolidColorBrush>
             </Canvas.Background>
 
 
@@ -40,11 +40,11 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Image x:Name="ground"   Height="296" Canvas.Top="459" Width="850" Source="grnd.png" Stretch="None" Canvas.Left="-45"/>
+            <Image x:Name="Ground"   Height="296" Canvas.Top="459" Width="850" Source="grnd.png" Stretch="None" Canvas.Left="-45"/>
 
-            <Image x:Name="tree" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="40"  Source="tree.png" Canvas.Left="10" Stretch="None"/>
-            <Image x:Name="bush" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Left="575" Canvas.Top="326" Source="bush.png" Stretch="None"/>
-            <Image x:Name="grass" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="reeds.png" Canvas.Left="-30" Stretch="None"/>
+            <Image x:Name="Tree" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="40"  Source="tree.png" Canvas.Left="10" Stretch="None"/>
+            <Image x:Name="Bush" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Left="575" Canvas.Top="326" Source="bush.png" Stretch="None"/>
+            <Image x:Name="Grass" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="reeds.png" Canvas.Left="-30" Stretch="None"/>
         </Canvas>
     </Grid>
 

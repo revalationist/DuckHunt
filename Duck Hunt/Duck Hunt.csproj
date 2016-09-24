@@ -64,6 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviour.cs" />
     <Compile Include="ExtraMethods.cs" />
     <Compile Include="ObjectClasses.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -117,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bush.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sheet.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
