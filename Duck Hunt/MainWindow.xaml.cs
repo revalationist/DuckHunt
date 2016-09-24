@@ -40,7 +40,7 @@ namespace Duck_Hunt
             Image source = new Image();
             BitmapImage tmp = new BitmapImage();
             tmp.BeginInit();
-            tmp.UriSource = new Uri("sheet.png", UriKind.Relative);
+            tmp.UriSource = new Uri("sheet_b.png", UriKind.Relative);
             tmp.EndInit();
 
             source.Stretch = Stretch.Fill;
@@ -49,9 +49,9 @@ namespace Duck_Hunt
             SpriteSheet main = new SpriteSheet(source);
 
             Image duckSrc = main.CropSpriteFrom(
-                MakeTuple(265, 115),
-                MakeTuple(28, 31)
-            );
+                MakeTuple(100, 100), // when you crop an image, some whitespace remains
+                MakeTuple(1722, 846) // so when we had a large image, the remaining bit was invisible
+            ); // due to being offscreen
 
             AISprite duck = new AISprite(
                 duckSrc,
@@ -62,9 +62,9 @@ namespace Duck_Hunt
             );
 
 
-            duck.Position = MakeTuple(100, 100);
+            duck.Position = MakeTuple(0, 0);
             
-            //duck.Move(MakeTuple(400, 400));
+            
         }
 
         private static Tuple<int, int> MakeTuple(int a, int b) // Shorthand for creating int, int tuples

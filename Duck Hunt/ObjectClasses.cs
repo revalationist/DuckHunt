@@ -125,8 +125,7 @@ namespace Duck_Hunt
                 )
             };
             output.Clip = clipGeometry;
-         
-
+            
             return output;
         }
 
