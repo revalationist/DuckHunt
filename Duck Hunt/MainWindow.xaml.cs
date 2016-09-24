@@ -32,14 +32,15 @@ namespace Duck_Hunt
 
         private void Ready(object sender, EventArgs e)
         {
-            GameBg.Visibility = Visibility.Collapsed;
+            //GameBg.Visibility = Visibility.Collapsed;
+            MainMenu.Visibility = Visibility.Collapsed;
 
             // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance)
 
             Image source = new Image();
             BitmapImage tmp = new BitmapImage();
             tmp.BeginInit();
-            tmp.UriSource = new Uri("sheet.gif", UriKind.Relative);
+            tmp.UriSource = new Uri("sheet.png", UriKind.Relative);
             tmp.EndInit();
 
             source.Stretch = Stretch.Fill;
@@ -61,7 +62,7 @@ namespace Duck_Hunt
             );
 
 
-            //duck.Position = MakeTuple(100, 100);
+            duck.Position = MakeTuple(100, 100);
             
             //duck.Move(MakeTuple(400, 400));
         }

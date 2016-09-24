@@ -5,8 +5,10 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.IO;
 using System.Timers;
 using System.Windows.Threading;
+using System.Windows.Media.Imaging;
 
 // Transformation methods and such to make my life easier.
 // Scale factor 3
@@ -93,21 +95,13 @@ namespace Duck_Hunt
             // Check that the numbers given are valid
             if (!Img.CheckPixelValues(start))
             {
-                throw new ArgumentException(string.Format("Attempted illegal crop of image -- image has width {0} and height {1} but starting point of the crop was {2}, {3}",
-                    Img.Width,
-                    Img.Height,
-
-                    start.Item1,
-                    start.Item2));
+                throw new ArgumentException(
+                    $"Attempted illegal crop of image -- image has width {Img.Width} and height {Img.Height} but starting point of the crop was {start.Item1}, {start.Item2}");
             }
             if (!Img.CheckPixelValues(end))
             {
-                throw new ArgumentException(string.Format("Attempted illegal crop of image -- image has width {0} and height {1} but ending point of the crop was {2}, {3}",
-                    Img.Width,
-                    Img.Height,
-
-                    end.Item1,
-                    end.Item2));
+                throw new ArgumentException(
+                    $"Attempted illegal crop of image -- image has width {Img.Width} and height {Img.Height} but ending point of the crop was {end.Item1}, {end.Item2}");
             }
 
             Image output = new Image();
@@ -118,17 +112,20 @@ namespace Duck_Hunt
 
             if (offset1 < 0 || offset2 < 0)
             {
-                throw new ArgumentException(string.Format("Difference between tuples in crop operation was {0}, {1} -- at least one of these was below zero and was therefore invalid.", offset1, offset2));
+                throw new ArgumentException(
+                    $"Difference between tuples in crop operation was {offset1}, {offset2} -- at least one of these was below zero and was therefore invalid.");
             }
 
 
-            RectangleGeometry clipGeometry = new RectangleGeometry();
-            clipGeometry.Rect = new Rect(
-                start.Item1, start.Item2,
-
-                offset1, offset2
-                );
+            RectangleGeometry clipGeometry = new RectangleGeometry
+            {
+                Rect = new Rect(
+                    start.Item1, start.Item2,
+                    offset1, offset2
+                )
+            };
             output.Clip = clipGeometry;
+         
 
             return output;
         }
@@ -220,7 +217,7 @@ namespace Duck_Hunt
             aTimer.Elapsed += ai;
             aTimer.Interval = update;
             aTimer.Enabled = true;
-            
+            aTimer.Start();
         }
 
         public AISprite(Image i, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod)
@@ -231,7 +228,7 @@ namespace Duck_Hunt
             aTimer.Elapsed += ai;
             aTimer.Interval = update;
             aTimer.Enabled = true;
-            
+            aTimer.Start();
 
             this.OnDeath = onDeathMethod;
         }
