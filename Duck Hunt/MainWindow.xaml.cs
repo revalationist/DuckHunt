@@ -30,7 +30,7 @@ namespace Duck_Hunt
             GameBg.Visibility = Visibility.Collapsed;
             //MainMenu.Visibility = Visibility.Collapsed;
 
-            // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance)
+            // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance).
 
             Image source = new Image();
             BitmapImage tmp = new BitmapImage();
