@@ -1,0 +1,14 @@
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\bin\Release\Duck Hunt.exe.config
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\bin\Release\Duck Hunt.exe
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\bin\Release\Duck Hunt.pdb
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt.csprojResolveAssemblyReference.cache
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\MainWindow.g.cs
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\App.g.cs
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt_MarkupCompile.cache
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt_MarkupCompile.lref
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\MainWindow.baml
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt.g.resources
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck_Hunt.Properties.Resources.resources
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt.csproj.GenerateResource.Cache
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt.exe
+F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Release\Duck Hunt.pdb
