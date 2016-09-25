@@ -88,11 +88,11 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="m29.TTF" />
-    <Resource Include="Pixel_NES.otf" />
+    <Resource Include="Resources\m29.TTF" />
+    <Resource Include="Resources\Pixel_NES.otf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,17 +102,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bush.png" />
-    <Resource Include="grnd.png" />
-    <Resource Include="reeds.png" />
-    <Resource Include="tree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="sheet_b.png" />
+    <Resource Include="Resources\bush.png" />
+    <Resource Include="Resources\grnd.png" />
+    <Resource Include="Resources\reeds.png" />
+    <Resource Include="Resources\sheetx3.png" />
+    <Resource Include="Resources\sheetx3div2.png" />
+    <Resource Include="Resources\tree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,11 +61,31 @@ namespace Duck_Hunt.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bush {
+            get {
+                object obj = ResourceManager.GetObject("bush", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap grnd {
+            get {
+                object obj = ResourceManager.GetObject("grnd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] DuckHunt {
+        internal static byte[] m29 {
             get {
-                object obj = ResourceManager.GetObject("DuckHunt", resourceCulture);
+                object obj = ResourceManager.GetObject("m29", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -83,9 +103,19 @@ namespace Duck_Hunt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sheet_b {
+        internal static System.Drawing.Bitmap reeds {
             get {
-                object obj = ResourceManager.GetObject("sheet_b", resourceCulture);
+                object obj = ResourceManager.GetObject("reeds", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sheetx3 {
+            get {
+                object obj = ResourceManager.GetObject("sheetx3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -21,31 +21,37 @@ namespace Duck_Hunt
         public static void Duck(object sender, ElapsedEventArgs e)
         {
             AISprite entity = Parents[sender as Timer];
+            if (entity.counter > entity.Timer.Interval)
+            {
+                entity.counter = 0;
 
-            //if (entity.frames != null)
-            //{
-                if (entity.counter > entity.Timer.Interval)
+                entity.spriteIndex = entity.spriteIndex + entity.spriteIncrement;
+
+                if (entity.spriteIndex >= entity.frames.Count-1 && entity.spriteIncrement > 0)
                 {
-                    entity.counter = 0;
-
-                    entity.spriteIndex = entity.spriteIndex + 1;
-
-                    if (entity.spriteIndex >= entity.frames.Count)
-                    {
-                        entity.spriteIndex = 0;
-                    }
-
-                    Application.Current?.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background,
-                    new Action(() =>
-                    {
-                        entity.Img.Source = entity.frames[entity.spriteIndex].Source;
-                    }));
-
-                    entity.Instance?.InvalidateVisual();
-
+                    entity.spriteIncrement = -1;
+                    
                 }
-            //}
+                if (entity.spriteIndex <= 0 && entity.spriteIncrement < 0)
+                {
+                    entity.spriteIncrement = 1;
+                   
+                }
+                
+
+
+                Application.Current?.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background,
+                new Action(() =>
+                {
+                    entity.Img.Source = entity.frames[entity.spriteIndex].Source;
+                }));
+
+                entity.Instance?.InvalidateVisual();
+
+                
+            }
+        
 
             entity.Move(entity.MovementDirection);
 

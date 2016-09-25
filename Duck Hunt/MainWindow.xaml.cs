@@ -13,10 +13,10 @@ namespace Duck_Hunt
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Image EmptyImage = new Image();
 
-        
 
+
+        public static Image empty = new Image();
         public static int Mode = 0;
         public static Dictionary<string, Image> Sprites;
         public static List<Image> duckSprites = new List<Image>();
@@ -53,8 +53,9 @@ namespace Duck_Hunt
             source.Source = tmp;
 
             SpriteSheet main = new SpriteSheet(source);
-            
-            duckSprites.Add(EmptyImage);
+
+
+            duckSprites.Add(empty);
 
             duckSprites.Add(main.CropSpriteFrom(
                 MakeTuple(399*2, 172*2),

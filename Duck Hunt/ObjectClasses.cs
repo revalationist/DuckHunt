@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
@@ -176,6 +177,9 @@ namespace Duck_Hunt
 
         }
 
+
+        public int spriteIncrement = 1;
+
         public Sprite(Image i, Canvas parent) 
             : base(i, parent)
         {
@@ -193,6 +197,7 @@ namespace Duck_Hunt
             : base(states[0], parent)
         {
             this.Img.MouseDown += eventHandler;
+
             frames = states;
             counter = 0;
             spriteIndex = 0;
@@ -242,6 +247,7 @@ namespace Duck_Hunt
             Timer.Enabled = true;
             Timer.Start();
 
+            
             MovementDirection = Tuple.Create(1, 0);
         }
 
