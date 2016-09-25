@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-
-using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using System.Xml;
 
 // Transformation methods and such to make my life easier.
 // Scale factor 3
