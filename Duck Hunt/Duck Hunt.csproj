@@ -103,31 +103,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="grnd.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bush.png" />
+    <Resource Include="grnd.png" />
+    <Resource Include="reeds.png" />
     <Resource Include="tree.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="reeds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bush.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="sheet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="sheet_b.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="sheet_b.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

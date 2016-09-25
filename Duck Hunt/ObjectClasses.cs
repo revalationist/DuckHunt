@@ -5,10 +5,10 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
-using System.IO;
 using System.Timers;
-using System.Windows.Threading;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Xml;
 
 // Transformation methods and such to make my life easier.
 // Scale factor 3
@@ -62,7 +62,7 @@ namespace Duck_Hunt
             set
             {
                 
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current?.Dispatcher.Invoke(() =>
                 {
                     Canvas.SetLeft(this.Img, value.Item1);
                     Canvas.SetTop(this.Img, value.Item2);
@@ -101,11 +101,11 @@ namespace Duck_Hunt
             if (!Img.CheckPixelValues(end))
             {
                 throw new ArgumentException(
-                    $"Attempted illegal crop of image -- image has width {Img.Width} and height {Img.Height} but ending point of the crop was {end.Item1}, {end.Item2}");
+                    $"Attempted illegal crop of image -- image has width {Img.Width} and height {Img.Height} but ending point of the crop was {start.Item1 + end.Item1}, {start.Item2 + end.Item2}");
             }
 
-            Image output = new Image();
-            output.Source = Img.Source;
+            
+            
 
             int offset1 = end.Item1;
             int offset2 = end.Item2;
@@ -113,19 +113,17 @@ namespace Duck_Hunt
             if (offset1 < 0 || offset2 < 0)
             {
                 throw new ArgumentException(
-                    $"Difference between tuples in crop operation was {offset1}, {offset2} -- at least one of these was below zero and was therefore invalid.");
+                    $"Offset in crop operation was x, y: {offset1}, {offset2} -- at least one of these was below zero and was therefore invalid.");
             }
 
 
-            RectangleGeometry clipGeometry = new RectangleGeometry
-            {
-                Rect = new Rect(
-                    start.Item1, start.Item2,
-                    offset1, offset2
-                )
-            };
-            output.Clip = clipGeometry;
-            
+            CroppedBitmap cb = new CroppedBitmap(
+                (BitmapSource)Img.Source,
+                new Int32Rect(start.Item1, start.Item2, 
+                    offset1, offset2)
+                );
+
+            Image output = new Image {Source = cb};
             return output;
         }
 
@@ -138,6 +136,8 @@ namespace Duck_Hunt
 
     public class Sprite : GameImageObj
     {
+        public List<Image> frames { get; private set; }
+        public int counter { get; set; }
         
         public void Move(Tuple<int,int> offset)
         {
@@ -145,20 +145,23 @@ namespace Duck_Hunt
             this.Position = result;
         }
 
-        public void Resize(int factor)
+        public Image Resize(int factor)
         {
-
-           
-
-            Application.Current.Dispatcher.Invoke(() =>
+            /*public static Image resizeImage(Image imgToResize, Size size)
             {
-                int w = Convert.ToInt32(this.Img.Height * factor);
-                int h = Convert.ToInt32(this.Img.Height * factor);
+                return (Image)(new Bitmap(imgToResize, size));
+            }
 
-                this.Img.Width = w;
-                this.Img.Height = w;
-            });
-            
+            yourImage = resizeImage(yourImage, new Size(50,50));*/
+
+
+            Image output = new Image();
+            output.Width = Img.Width*factor;
+            output.Height = Img.Height*factor;
+
+            output.Source = Img.Source;
+            return output;
+
         }
 
         public Sprite(Image i, Canvas parent) 
@@ -171,6 +174,15 @@ namespace Duck_Hunt
             : base(i, parent)
         {
             this.Img.MouseDown += eventHandler;
+            frames = null;
+        }
+
+        public Sprite(List<Image> states, MouseButtonEventHandler eventHandler, Canvas parent)
+            : base(states[0], parent)
+        {
+            this.Img.MouseDown += eventHandler;
+            frames = states;
+            counter = 0;
         }
 
     } // Not abstract as I may use the crosshair for this
@@ -221,6 +233,30 @@ namespace Duck_Hunt
 
         public AISprite(Image i, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod)
            : base(i, eventHandler, parent)
+        {
+            Behaviour.Parents[aTimer] = this;
+            //Timer aTimer = new Timer();
+            aTimer.Elapsed += ai;
+            aTimer.Interval = update;
+            aTimer.Enabled = true;
+            aTimer.Start();
+
+            this.OnDeath = onDeathMethod;
+        }
+
+        public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update)
+            : base(sprites, eventHandler, parent)
+        {
+            Behaviour.Parents[aTimer] = this;
+            //Timer aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += ai;
+            aTimer.Interval = update;
+            aTimer.Enabled = true;
+            aTimer.Start();
+        }
+
+        public AISprite(List<Image> sprites , MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod)
+           : base(sprites, eventHandler, parent)
         {
             Behaviour.Parents[aTimer] = this;
             //Timer aTimer = new Timer();

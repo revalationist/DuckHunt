@@ -40,11 +40,11 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Image x:Name="Ground"   Height="296" Canvas.Top="459" Width="850" Source="grnd.png" Stretch="None" Canvas.Left="-45"/>
+            <Image x:Name="Ground" Canvas.ZIndex="9"   Height="296" Canvas.Top="459" Width="850" Source="grnd.png" Stretch="None" Canvas.Left="-45"/>
 
-            <Image x:Name="Tree" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="40"  Source="tree.png" Canvas.Left="10" Stretch="None"/>
+            <Image x:Name="Tree" Canvas.ZIndex="5"  UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="40"  Source="tree.png" Canvas.Left="10" Stretch="None"/>
             <Image x:Name="Bush" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Left="575" Canvas.Top="326" Source="bush.png" Stretch="None"/>
-            <Image x:Name="Grass" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="reeds.png" Canvas.Left="-30" Stretch="None"/>
+            <Image x:Name="Grass" Canvas.ZIndex="10"  UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="reeds.png" Canvas.Left="-30" Stretch="None"/>
         </Canvas>
     </Grid>
 
