@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -54,6 +55,8 @@ namespace Duck_Hunt
             }
         }
 
+
+
         private Tuple<int, int> _position; // backing field
 
         public Tuple<int, int> Position
@@ -61,12 +64,20 @@ namespace Duck_Hunt
             get { return this._position; }
             set
             {
-                
-                Application.Current?.Dispatcher.Invoke(() =>
+                try
                 {
-                    Canvas.SetLeft(this.Img, value.Item1);
-                    Canvas.SetTop(this.Img, value.Item2);
-                });
+                    Application.Current?.Dispatcher.Invoke(() =>
+                    {
+                        Canvas.SetLeft(this.Img, value.Item1);
+                        Canvas.SetTop(this.Img, value.Item2);
+                    });
+
+                }
+                catch (TaskCanceledException)
+                {
+                    // the user has closed our application, we don't care about exceptions anymore
+                }
+                    
 
                 
                 
@@ -185,7 +196,7 @@ namespace Duck_Hunt
             frames = states;
             counter = 0;
             spriteIndex = 0;
-            this.Img.Source = this.frames[spriteIndex].Source;
+            this.Img.Source = this.frames[1].Source;
         }
 
     } // Not abstract as I may use the crosshair for this
@@ -196,12 +207,11 @@ namespace Duck_Hunt
 
         public Func<AISprite, int> OnDeath { get; set; }
         
-
         public string[] Args { get; set; }
 
-       
+        public Tuple<int, int> MovementDirection { get; set; }
 
-        public Timer aTimer = new Timer();
+        public Timer Timer = new Timer();
         private bool _dead;
 
         public bool Dead
@@ -217,56 +227,34 @@ namespace Duck_Hunt
                 if (value == true) // if we're setting dead to true
                 {
                     OnDeath(this);
-                    aTimer.Enabled = false;
+                    Timer.Enabled = false;
                 }
             }
         }
-        
 
-        public AISprite(Image i, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update) 
-            : base(i, eventHandler, parent)
+
+        private void init(ElapsedEventHandler ai, int update)
         {
-            Behaviour.Parents[aTimer] = this;
+            Behaviour.Parents[Timer] = this;
             //Timer aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += ai;
-            aTimer.Interval = update;
-            aTimer.Enabled = true;
-            aTimer.Start();
-        }
+            Timer.Elapsed += ai;
+            Timer.Interval = update;
+            Timer.Enabled = true;
+            Timer.Start();
 
-        public AISprite(Image i, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod)
-           : base(i, eventHandler, parent)
-        {
-            Behaviour.Parents[aTimer] = this;
-            //Timer aTimer = new Timer();
-            aTimer.Elapsed += ai;
-            aTimer.Interval = update;
-            aTimer.Enabled = true;
-            aTimer.Start();
-
-            this.OnDeath = onDeathMethod;
+            MovementDirection = Tuple.Create(1, 0);
         }
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update)
             : base(sprites, eventHandler, parent)
         {
-            Behaviour.Parents[aTimer] = this;
-            //Timer aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += ai;
-            aTimer.Interval = update;
-            aTimer.Enabled = true;
-            aTimer.Start();
+            init(ai, update);
         }
 
         public AISprite(List<Image> sprites , MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod)
            : base(sprites, eventHandler, parent)
         {
-            Behaviour.Parents[aTimer] = this;
-            //Timer aTimer = new Timer();
-            aTimer.Elapsed += ai;
-            aTimer.Interval = update;
-            aTimer.Enabled = true;
-            aTimer.Start();
+            init(ai, update);
 
             this.OnDeath = onDeathMethod;
         }

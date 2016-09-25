@@ -12,6 +12,10 @@ namespace Duck_Hunt
 {
     public static class Behaviour
     {
+        public static int w = 769; // So this would normally be bad practice but the window is a fixed size
+        public static int h = 721; // Having defs here makes it easier to evaluate border conditions
+        // because I don't have to access the MainWindow instance and deal with threads
+
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
         public static void Duck(object sender, ElapsedEventArgs e)
@@ -20,7 +24,7 @@ namespace Duck_Hunt
 
             //if (entity.frames != null)
             //{
-                if (entity.counter > entity.aTimer.Interval)
+                if (entity.counter > entity.Timer.Interval)
                 {
                     entity.counter = 0;
 
@@ -37,11 +41,25 @@ namespace Duck_Hunt
                     {
                         entity.Img.Source = entity.frames[entity.spriteIndex].Source;
                     }));
-                
+
+                    entity.Instance?.InvalidateVisual();
+
                 }
             //}
 
-            entity.Move(Tuple.Create(1, 1));
+            entity.Move(entity.MovementDirection);
+
+            if (entity.Position.Item1 + entity.Img.ActualWidth > w)
+            {
+                entity.MovementDirection = Tuple.Create(-1, 0);
+            }
+
+            if (entity.Position.Item1 < 0)
+            {
+                entity.MovementDirection = Tuple.Create(1, 0);
+            }
+           
+
             entity.counter++;
         }
     }

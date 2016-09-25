@@ -15,8 +15,13 @@ namespace Duck_Hunt
     {
         public static Image EmptyImage = new Image();
 
+        
+
         public static int Mode = 0;
         public static Dictionary<string, Image> Sprites;
+        public static List<Image> duckSprites = new List<Image>();
+
+
 
         public MainWindow()
         {
@@ -25,8 +30,7 @@ namespace Duck_Hunt
             //this.bg.Color = System.Windows.Media.Color.FromArgb(255, 63, 191, 255);
             this.Loaded += new RoutedEventHandler(Ready);
 
-            
-
+           
 
 
 
@@ -34,8 +38,8 @@ namespace Duck_Hunt
 
         private void Ready(object sender, EventArgs e)
         {
-            //GameBg.Visibility = Visibility.Collapsed;
-            MainMenu.Visibility = Visibility.Collapsed;
+            GameBg.Visibility = Visibility.Collapsed;
+            //MainMenu.Visibility = Visibility.Collapsed;
 
             // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance)
 
@@ -49,45 +53,25 @@ namespace Duck_Hunt
             source.Source = tmp;
 
             SpriteSheet main = new SpriteSheet(source);
-
             
+            duckSprites.Add(EmptyImage);
 
-            Image duckSrc = main.CropSpriteFrom(
-                MakeTuple(399*2, 172*2), // when you crop an image, some whitespace remains
-                MakeTuple(40*2, 47*2) // so when we had a large image, the remaining bit was invisible
-            ); // due to being offscreen
-
-            Image filler = main.CropSpriteFrom(
-                MakeTuple(400*2, 172*2),
+            duckSprites.Add(main.CropSpriteFrom(
+                MakeTuple(399*2, 172*2),
                 MakeTuple(40*2, 47*2)
-            );
+            ));
 
-            Image duckSrc2 = main.CropSpriteFrom(
+            duckSprites.Add(main.CropSpriteFrom(
                 MakeTuple(891, 351),
                 MakeTuple(96, 87)
-            );
+            ));
 
-            Image ducksrc3 = main.CropSpriteFrom(
+            duckSprites.Add(main.CropSpriteFrom(
                 MakeTuple(991, 351),
                 MakeTuple(77, 93)
-                );
-
-            List<Image> duckSprites = new List<Image>() {filler, duckSrc, duckSrc2, ducksrc3}; // for some reason it never uses the first one
+            ));
 
 
-            AISprite duck = new AISprite(
-                duckSprites,
-                DuckClick,
-                GameBg,
-                Behaviour.Duck,
-                10// ms
-            )
-            {
-                Position = MakeTuple(0, 0),
-                Priority = 0
-            };
-
-            //duck.Img = duck.Resize(4);
 
 
         }
@@ -114,6 +98,21 @@ namespace Duck_Hunt
             MainMenu.Visibility = Visibility.Collapsed;
             Mode = newMode;
             GameBg.Visibility = Visibility.Visible;
+
+            AISprite duck = new AISprite(
+                duckSprites,
+                DuckClick,
+                GameBg,
+                Behaviour.Duck,
+                10// ms
+            )
+            {
+                Position = MakeTuple(0, 0),
+                Priority = 0
+            };
+
+            duck.Move(Tuple.Create(0, 100));
+
         }
 
         private void EnterGame1(object sender, System.Windows.Input.MouseButtonEventArgs e)
