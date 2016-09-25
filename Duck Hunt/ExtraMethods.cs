@@ -22,15 +22,9 @@ namespace Duck_Hunt
             // That is, check that it's not outside boundaries
             // Assumes item1 in tuple is X co-ord of point, and item2 is Y co-ord
 
-            if (point.Item1 > i.Width && point.Item1 >= 0)
-            {
-                return false;
-            }
-            
-            if (point.Item2 > i.Height && point.Item2 >= 0)
-            {
-                return false;
-            }
+            if (point.Item1 > i.Width && point.Item1 >= 0) { return false; }
+
+            if (point.Item2 > i.Height && point.Item2 >= 0) { return false; } // I could've squished this into a single if using || but I felt that would reduce readability. 
 
             return true; // Returning in if statements will automatically prevent this block here from executing.
             // So basically, this means 'if nothing's wrong, go ahead and return true'

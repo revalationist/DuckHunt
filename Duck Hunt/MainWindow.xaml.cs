@@ -13,26 +13,16 @@ namespace Duck_Hunt
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
         // Create an instance of several variables which we will use throughout the whole class.
         public static Image empty = new Image();
         public static int Mode = 0;
         public static Dictionary<string, Image> Sprites;
         public static List<Image> duckSprites = new List<Image>();
 
-
-
         public MainWindow()
         {
             InitializeComponent();
-
             this.Loaded += new RoutedEventHandler(Ready); // Only start making classes and sprites once everything is ready.
-
-           
-
-
-
         }
 
         private void Ready(object sender, EventArgs e)
@@ -52,7 +42,6 @@ namespace Duck_Hunt
             source.Source = tmp;
 
             SpriteSheet main = new SpriteSheet(source); // Instance the spritesheet so now we can use its extension methods.
-
 
             duckSprites.Add(empty);
 
@@ -76,15 +65,6 @@ namespace Duck_Hunt
                 Tuple.Create(991, 351),
                 Tuple.Create(77, 93)
             ));
-
-
-
-
-        }
-
-        private static Tuple<int, int> MakeTuple(int a, int b) // Shorthand for creating int, int tuples
-        {
-            return new Tuple<int, int>(a, b);
         }
 
         private void MenuOptionMEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -113,32 +93,18 @@ namespace Duck_Hunt
                 GameBg, // Parent canvas
                 Behaviour.Duck, // AI function that makes it move/change sprites
                 10 // Interval (in milliseconds) between calls to above AI function
-            ) { Position = MakeTuple(0, 100), Priority = 0 }; // Define initial properties of this duck
-
-            
-
-
+            ) { Position = Tuple.Create(0, 100), Priority = 0 }; // Define initial properties of this duck
         }
 
-        private void EnterGame1(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            GameStart(1); // Different modes which aren't implemented yet
-        }
+        // Different modes which aren't implemented yet
 
-        private void EnterGame2(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            GameStart(2);
-        }
+        private void EnterGame1(object sender, System.Windows.Input.MouseButtonEventArgs e) { GameStart(1);  }
 
-        private void EnterGame3(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            GameStart(3);
-        }
+        private void EnterGame2(object sender, System.Windows.Input.MouseButtonEventArgs e) { GameStart(2); }
 
-        private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            // bang
-            // code for successful shot goes here
-        }
+        private void EnterGame3(object sender, System.Windows.Input.MouseButtonEventArgs e) { GameStart(3); }
+
+        private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e) { throw new System.NotImplementedException(); }
+
     }
 }
