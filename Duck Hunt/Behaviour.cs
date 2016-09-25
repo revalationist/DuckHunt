@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Duck_Hunt
 {
@@ -16,22 +18,28 @@ namespace Duck_Hunt
         {
             AISprite entity = Parents[sender as Timer];
 
-            if (entity.frames != null)
-            {
-                if (entity.counter > entity.aTimer.Interval*100)
+            //if (entity.frames != null)
+            //{
+                if (entity.counter > entity.aTimer.Interval)
                 {
                     entity.counter = 0;
-                    int spriteIndex = entity.frames.IndexOf(entity.Img);
-                    spriteIndex++;
 
-                    if (spriteIndex >= entity.frames.Count)
+                    entity.spriteIndex = entity.spriteIndex + 1;
+
+                    if (entity.spriteIndex >= entity.frames.Count)
                     {
-                        spriteIndex = 0;
+                        entity.spriteIndex = 0;
                     }
 
-                    entity.Img = entity.frames[spriteIndex];
+                    Application.Current?.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background,
+                    new Action(() =>
+                    {
+                        entity.Img.Source = entity.frames[entity.spriteIndex].Source;
+                    }));
+                
                 }
-            }
+            //}
 
             entity.Move(Tuple.Create(1, 1));
             entity.counter++;

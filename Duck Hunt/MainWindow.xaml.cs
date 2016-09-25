@@ -13,6 +13,8 @@ namespace Duck_Hunt
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Image EmptyImage = new Image();
+
         public static int Mode = 0;
         public static Dictionary<string, Image> Sprites;
 
@@ -48,17 +50,29 @@ namespace Duck_Hunt
 
             SpriteSheet main = new SpriteSheet(source);
 
+            
+
             Image duckSrc = main.CropSpriteFrom(
                 MakeTuple(399*2, 172*2), // when you crop an image, some whitespace remains
                 MakeTuple(40*2, 47*2) // so when we had a large image, the remaining bit was invisible
             ); // due to being offscreen
+
+            Image filler = main.CropSpriteFrom(
+                MakeTuple(400*2, 172*2),
+                MakeTuple(40*2, 47*2)
+            );
 
             Image duckSrc2 = main.CropSpriteFrom(
                 MakeTuple(891, 351),
                 MakeTuple(96, 87)
             );
 
-            List<Image> duckSprites = new List<Image>() {duckSrc, duckSrc2};
+            Image ducksrc3 = main.CropSpriteFrom(
+                MakeTuple(991, 351),
+                MakeTuple(77, 93)
+                );
+
+            List<Image> duckSprites = new List<Image>() {filler, duckSrc, duckSrc2, ducksrc3}; // for some reason it never uses the first one
 
 
             AISprite duck = new AISprite(

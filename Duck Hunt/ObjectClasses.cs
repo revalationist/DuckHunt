@@ -138,6 +138,7 @@ namespace Duck_Hunt
     {
         public List<Image> frames { get; private set; }
         public int counter { get; set; }
+        public int spriteIndex { get; set; }
         
         public void Move(Tuple<int,int> offset)
         {
@@ -183,6 +184,8 @@ namespace Duck_Hunt
             this.Img.MouseDown += eventHandler;
             frames = states;
             counter = 0;
+            spriteIndex = 0;
+            this.Img.Source = this.frames[spriteIndex].Source;
         }
 
     } // Not abstract as I may use the crosshair for this
