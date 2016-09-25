@@ -15,7 +15,7 @@ namespace Duck_Hunt
     {
 
 
-
+        // Create an instance of several variables which we will use throughout the whole class.
         public static Image empty = new Image();
         public static int Mode = 0;
         public static Dictionary<string, Image> Sprites;
@@ -26,9 +26,8 @@ namespace Duck_Hunt
         public MainWindow()
         {
             InitializeComponent();
-            //Main_Menu.Visibility = Visibility.Collapsed;
-            //this.bg.Color = System.Windows.Media.Color.FromArgb(255, 63, 191, 255);
-            this.Loaded += new RoutedEventHandler(Ready);
+
+            this.Loaded += new RoutedEventHandler(Ready); // Only start making classes and sprites once everything is ready.
 
            
 
@@ -46,30 +45,36 @@ namespace Duck_Hunt
             Image source = new Image();
             BitmapImage tmp = new BitmapImage();
             tmp.BeginInit();
-            tmp.UriSource = new Uri(@"../../Resources/sheetx3.png", UriKind.Relative);
+            tmp.UriSource = new Uri(@"../../Resources/sheetx3.png", UriKind.Relative); // The amount of hoops you have to jump through to get a uri into an Image control (programmatically) is appaling
             tmp.EndInit();
 
             source.Stretch = Stretch.Fill;
             source.Source = tmp;
 
-            SpriteSheet main = new SpriteSheet(source);
+            SpriteSheet main = new SpriteSheet(source); // Instance the spritesheet so now we can use its extension methods.
 
 
             duckSprites.Add(empty);
 
+            /* So, for some reason, the Behaviour method for cycling through sprites likes to ignore at least one sprite in the list.
+             Believe me, I've spent hours trying to figure out why, to no end.
+             So you might think: why not just add an empty value in class initialization so that it's less ugly?
+             Well, if I do that it's starts ignoring a *different* value! I still have no idea why that happens, either.
+             So then I tried putting the empty part in different places, which didn't help as now it was displaying an empty image. */
+
             duckSprites.Add(main.CropSpriteFrom(
-                MakeTuple(399*2, 172*2),
-                MakeTuple(40*2, 47*2)
+                Tuple.Create(399*2, 172*2), // Start
+                Tuple.Create(40*2, 47*2)
             ));
 
             duckSprites.Add(main.CropSpriteFrom(
-                MakeTuple(891, 351),
-                MakeTuple(96, 87)
+                Tuple.Create(891, 351),
+                Tuple.Create(96, 87)
             ));
 
             duckSprites.Add(main.CropSpriteFrom(
-                MakeTuple(991, 351),
-                MakeTuple(77, 93)
+                Tuple.Create(991, 351),
+                Tuple.Create(77, 93)
             ));
 
 
@@ -84,41 +89,40 @@ namespace Duck_Hunt
 
         private void MenuOptionMEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            // When the user hovers their mouse over an option in the menu, make it white for responsive feedback.
             Label obj = sender as Label;
-            obj.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 255, 255));  //#EA9E24
+            obj.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 255, 255));  
         }
 
         private void MenuOptionMLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            // When their mouse leaves, return it to original colour. These methods are only listeners for the 3 game options.
             Label obj = sender as Label;
             obj.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 252, 152, 56));
         }
 
-        private void GameStart(int newMode)
+        private void GameStart(int newMode) // newMode is as yet unimplemented, but we could access it in behaviour using entity.instance.Mode
         {
             MainMenu.Visibility = Visibility.Collapsed;
             Mode = newMode;
             GameBg.Visibility = Visibility.Visible;
 
             AISprite duck = new AISprite(
-                duckSprites,
-                DuckClick,
-                GameBg,
-                Behaviour.Duck,
-                10// ms
-            )
-            {
-                Position = MakeTuple(0, 0),
-                Priority = 0
-            };
+                duckSprites, // List of sprites to animate with
+                DuckClick, // Click event handler
+                GameBg, // Parent canvas
+                Behaviour.Duck, // AI function that makes it move/change sprites
+                10 // Interval (in milliseconds) between calls to above AI function
+            ) { Position = MakeTuple(0, 100), Priority = 0 }; // Define initial properties of this duck
 
-            duck.Move(Tuple.Create(0, 100));
+            
+
 
         }
 
         private void EnterGame1(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            GameStart(1);
+            GameStart(1); // Different modes which aren't implemented yet
         }
 
         private void EnterGame2(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -134,6 +138,7 @@ namespace Duck_Hunt
         private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // bang
+            // code for successful shot goes here
         }
     }
 }

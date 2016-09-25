@@ -11,24 +11,11 @@ namespace Duck_Hunt
 {
     public static class ExtraMethods
     {
+        public static Tuple<int, int> Add(this Tuple<int, int> a, Tuple<int, int> b) { return Tuple.Create(a.Item1 + b.Item1, a.Item2 + b.Item2); }
+        // Simple sum function for tuples, this is used to calculate the resultant position after an offset operation in Sprite.Move.
 
-        public static Tuple<int, int> TupleSum(Tuple<int, int> a, Tuple<int, int> b)
-        {
-            return new Tuple<int, int>(
-                a.Item1 + b.Item1,
-                a.Item2 + b.Item2
-            );
-        }
-
-        public static Tuple<int, int> TupleDiff(Tuple<int, int> a, Tuple<int, int> b)
-        {
-            return new Tuple<int, int>(
-                a.Item1 - b.Item1,
-                a.Item2 - b.Item2
-            );
-        }
-
-        public static bool CheckPixelValues(this Image i, Tuple<int, int> point)
+        public static bool CheckPixelValues(this Image i, Tuple<int, int> point) // Did not feel like this needed to be included in the SpriteSheet class
+            // Also, it could have more uses than just cropping, so I left it as static.
         {
 
             // Validate any given point against an image.
@@ -44,7 +31,9 @@ namespace Duck_Hunt
             {
                 return false;
             }
-            return true;
+
+            return true; // Returning in if statements will automatically prevent this block here from executing.
+            // So basically, this means 'if nothing's wrong, go ahead and return true'
         }
 
 
