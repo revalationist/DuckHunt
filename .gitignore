@@ -1,1 +1,6 @@
-bin/
+Duck Hunt/bin/
+Duck Hunt/obj/
+Duck Hunt/obj/Release/Duck Hunt_MarkupCompile.i.cache
+Duck Hunt/obj/Release/Duck Hunt.exe
+*.pdb
+*.cache
