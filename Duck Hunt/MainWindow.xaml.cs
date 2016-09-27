@@ -128,30 +128,34 @@ namespace Duck_Hunt
         {
             // bang
             // code for maybe successful shot goes here
-            BackgroundWorker UpdateUI = new BackgroundWorker
+            BackgroundWorker UpdateUI = new BackgroundWorker // Define a new worker which will wait for us.
             {
-                WorkerSupportsCancellation = true,
-                WorkerReportsProgress = true
+                WorkerSupportsCancellation = true, 
+                WorkerReportsProgress = true       
             };
 
+            /* Using this to wait is useful, because it means we run into less issues with
+             * the UI threa; which may still be paused when it comes time to make the flash
+             * invisible once again.
+             *  */
 
-            MuzzleFlash.Visibility = Visibility.Visible;
+            MuzzleFlash.Visibility = Visibility.Visible; // First make our flash visible
 
-            UpdateUI.DoWork += UI_DoWork;
-            UpdateUI.RunWorkerCompleted += CancelUpdate;
-            UpdateUI.RunWorkerAsync();
+            UpdateUI.DoWork += UI_DoWork; // Then we tell our worker that it is to wait
+            UpdateUI.RunWorkerCompleted += CancelUpdate; // And give it the cancel function which makes the flash invisible once again
+            UpdateUI.RunWorkerAsync(); // Start the waiting period
         }
 
-        private void UI_DoWork(object sender, DoWorkEventArgs e)
+        private static void UI_DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(250);
+            Thread.Sleep(250); // ...wait
         }
 
 
         private void CancelUpdate(object sender, RunWorkerCompletedEventArgs e)
         {
-            MuzzleFlash.Visibility = Visibility.Collapsed;
-            InvalidateVisual();
+            MuzzleFlash.Visibility = Visibility.Collapsed; // Make flash invisible
+            InvalidateVisual(); // Force window to update
         }
     }
 }
