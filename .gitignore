@@ -8,3 +8,4 @@ Duck Hunt/obj/Release/Duck Hunt.exe
 Duck Hunt/obj/Release/Duck Hunt_MarkupCompile.i.cache
 *.pdb
 Duck Hunt/obj/*
+*.suo
