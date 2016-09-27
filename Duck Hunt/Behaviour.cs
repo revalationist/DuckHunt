@@ -8,19 +8,19 @@ namespace Duck_Hunt
 {
     public static class Behaviour
     {
-        public static int w = 769;
-            // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
+        public static int Width = 769;
+        // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
 
-        public static int h = 721; // Having defs here makes it easier to evaluate border conditions
+        public static int Height = 721; // Having defs here makes it easier to evaluate border conditions
         // because I don't have to access the MainWindow instance and deal with threads, it should also be faster.
-        public static readonly int duckSpeed = 9;
+        public static readonly int DuckSpeed = 9;
 
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
         public static void Duck(object sender, ElapsedEventArgs e)
         {
             AISprite entity = Parents[sender as Timer];
-                // we don't need any if(frames != null); this function is for a duck which is always animated.
+            // we don't need any if(frames != null); this function is for a duck which is always animated.
             if (entity.Counter > 5)
             {
                 entity.Counter = 0;
@@ -46,33 +46,33 @@ namespace Duck_Hunt
 
 
                 Application.Current?.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Background,
-                        new Action(() => { entity.Img.Source = entity.Frames[entity.SpriteIndex].Source; }));
-                    // Again, access new threads to allow us to fiddle with UI elements.
+                    DispatcherPriority.Background,
+                    new Action(() => { entity.Img.Source = entity.Frames[entity.SpriteIndex].Source; }));
+                // Again, access new threads to allow us to fiddle with UI elements.
 
                 entity.Instance?.InvalidateVisual(); // Force redraw just in case.
             }
 
 
             entity.Move(entity.MovementDirection);
-                // The Move() method of Sprite already invokes a new thread, so no need for that here.
+            // The Move() method of Sprite already invokes a new thread, so no need for that here.
 
             /* The below is currently just example AI behaviour. It will be improved soon */
 
             // Entity AI behaviour to make it bounce off walls:
 
             if (entity.Position.Item1 < 0)
-                entity.MovementDirection = Tuple.Create(duckSpeed, entity.MovementDirection.Item2);
-            if (entity.Position.Item1 > w - entity.Img.ActualWidth)
-                entity.MovementDirection = Tuple.Create(-duckSpeed, entity.MovementDirection.Item2);
+                entity.MovementDirection = Tuple.Create(DuckSpeed, entity.MovementDirection.Item2);
+            if (entity.Position.Item1 > Width - entity.Img.ActualWidth)
+                entity.MovementDirection = Tuple.Create(-DuckSpeed, entity.MovementDirection.Item2);
 
             if (entity.Position.Item2 < 0)
-                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, duckSpeed);
+                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, DuckSpeed);
             if (entity.Position.Item2 > 400)
-                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, -duckSpeed);
+                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, -DuckSpeed);
 
             entity.Counter++;
-                // Finally, increase the counter (for operations above such as changing the sprite occasionally
+            // Finally, increase the counter (for operations above such as changing the sprite occasionally
         }
     }
 }

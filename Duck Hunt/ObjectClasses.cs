@@ -270,7 +270,7 @@ namespace Duck_Hunt
             Counter = 0;
             SpriteIndex = 0;
 
-            MovementDirection = Tuple.Create(Behaviour.duckSpeed, Behaviour.duckSpeed);
+            MovementDirection = Tuple.Create(Behaviour.DuckSpeed, Behaviour.DuckSpeed);
         }
     }
 }
