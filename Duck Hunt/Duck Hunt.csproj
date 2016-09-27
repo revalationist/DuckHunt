@@ -65,6 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Behaviour.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="ExtraMethods.cs" />
     <Compile Include="ObjectClasses.cs" />
     <Compile Include="MainWindow.xaml.cs">
