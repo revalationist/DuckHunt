@@ -52,17 +52,17 @@ namespace Duck_Hunt
              */
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(399*2, 172*2), // Start
+                Tuple.Create(399*2, 172*2), // Duck frame 1 (alive, moving)
                 Tuple.Create(40*2, 47*2)
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(891, 351),
+                Tuple.Create(891, 351), // Duck frame 2 (alive, moving)
                 Tuple.Create(96, 87)
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(991, 351),
+                Tuple.Create(991, 351), // Duck frame 3 (alive, moving)
                 Tuple.Create(77, 93)
             ));
         }
