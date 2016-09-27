@@ -115,7 +115,7 @@ namespace Duck_Hunt
 
         private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         private void Shoot(object sender, System.Windows.Input.MouseButtonEventArgs e)
