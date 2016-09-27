@@ -15,6 +15,7 @@ namespace Duck_Hunt
         public static int w = 769; // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
         public static int h = 721; // Having defs here makes it easier to evaluate border conditions
         // because I don't have to access the MainWindow instance and deal with threads, it should also be faster.
+        public static readonly int duckSpeed = 3;
 
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
@@ -59,10 +60,17 @@ namespace Duck_Hunt
 
             /* The below is currently just example AI behaviour. It will be improved soon */
 
-            if (entity.Position.Item1 + entity.Img.ActualWidth > w) // check if we hit the right wall of the window. We're only moving on X for now,
-                { entity.MovementDirection = Tuple.Create(-1, 0); } // so that's all that's needed.
+            // Entity AI behaviour to make it bounce off walls:
+
             if (entity.Position.Item1 < 0)
-                { entity.MovementDirection = Tuple.Create(1, 0); } // Same goes if we hit the left wall.
+                entity.MovementDirection = Tuple.Create(duckSpeed, entity.MovementDirection.Item2);
+            if (entity.Position.Item1 > w - entity.Img.ActualWidth)
+                entity.MovementDirection = Tuple.Create(-duckSpeed, entity.MovementDirection.Item2);
+
+            if (entity.Position.Item2 < 0)
+                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, duckSpeed);
+            if (entity.Position.Item2 > 400)
+                entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, -duckSpeed);
 
             entity.counter++; // Finally, increase the counter (for operations above such as changing the sprite occasionally
         }

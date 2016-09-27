@@ -257,7 +257,7 @@ namespace Duck_Hunt
             counter = 0;
             spriteIndex = 0;
 
-            MovementDirection = Tuple.Create(1, 0);
+            MovementDirection = Tuple.Create(3, 3);
         }
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update) 
