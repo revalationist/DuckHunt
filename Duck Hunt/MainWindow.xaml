@@ -22,6 +22,7 @@
             <Label x:Name="LabelHighscore" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="TOP SCORE = 000000" Canvas.Top="495" Foreground="#FF4CDC48" Width="763" FontFamily="/Duck Hunt;component/Resources/#Pixel NES" FontSize="36"/>
             <Label x:Name="Copyright1" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Content=" ©1984 NINTENDO CO., LTD. " Canvas.Top="552" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/Resources/#Pixel NES" FontSize="28"/>
             <Label x:Name="Copyright2" HorizontalContentAlignment="Center"  Content="REMADE UNDER FAIR USE by jay malhotra, 2016" Canvas.Top="595" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/Resources/#Pixel NES" FontSize="14" Height="77"/>
+            <Image x:Name="Spritesheet" Visibility="Collapsed" Source="Resources/sheetx3.png"></Image>
         </Canvas>
 
         <Canvas Visibility="Collapsed" x:Name="GameBg" MouseDown="Shoot">
