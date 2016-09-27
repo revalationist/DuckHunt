@@ -15,14 +15,14 @@ namespace Duck_Hunt
         public static int w = 769; // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
         public static int h = 721; // Having defs here makes it easier to evaluate border conditions
         // because I don't have to access the MainWindow instance and deal with threads, it should also be faster.
-        public static readonly int duckSpeed = 3;
+        public static readonly int duckSpeed = 9;
 
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
         public static void Duck(object sender, ElapsedEventArgs e)
         {
             AISprite entity = Parents[sender as Timer]; // we don't need any if(frames != null); this function is for a duck which is always animated.
-            if (entity.counter > entity.Timer.Interval)
+            if (entity.counter > 5)
             {
                 entity.counter = 0;
 

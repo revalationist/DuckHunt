@@ -257,7 +257,7 @@ namespace Duck_Hunt
             counter = 0;
             spriteIndex = 0;
 
-            MovementDirection = Tuple.Create(3, 3);
+            MovementDirection = Tuple.Create(Behaviour.duckSpeed, Behaviour.duckSpeed);
         }
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update) 
@@ -270,7 +270,6 @@ namespace Duck_Hunt
 
         public AISprite(List<Image> sprites , MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, 
             Func<AISprite, int> onDeathMethod) 
-
             // overload 2, we use this for ducks, because they need to do something when they die
             // (change the animation and award the player points)
            : base(sprites, eventHandler, parent)

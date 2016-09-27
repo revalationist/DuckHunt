@@ -24,7 +24,7 @@
             <Label x:Name="Copyright2" HorizontalContentAlignment="Center"  Content="REMADE UNDER FAIR USE by jay malhotra, 2016" Canvas.Top="595" Foreground="White" Width="763" FontFamily="/Duck Hunt;component/Resources/#Pixel NES" FontSize="14" Height="77"/>
         </Canvas>
 
-        <Canvas Visibility="Collapsed" x:Name="GameBg">
+        <Canvas Visibility="Collapsed" x:Name="GameBg" MouseDown="Shoot">
             <Canvas.Background>
                 <SolidColorBrush x:Name="Bg" Color="#3FBFFF"></SolidColorBrush>
             </Canvas.Background>
@@ -45,7 +45,13 @@
             <Image x:Name="Tree" Canvas.ZIndex="5"  UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="40"  Source="Resources/tree.png" Canvas.Left="10" Stretch="None"/>
             <Image x:Name="Bush" UseLayoutRounding="True" Panel.ZIndex="8" SnapsToDevicePixels="True" Canvas.Left="575" Canvas.Top="326" Source="Resources/bush.png" Stretch="None"/>
             <Image x:Name="Grass" Canvas.ZIndex="10"  UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="Resources/reeds.png" Canvas.Left="-30" Stretch="None"/>
+            <Rectangle x:Name="MuzzleFlash" Height="10000" Width="10000" Fill="White" Canvas.ZIndex="999999"  Visibility="Hidden">
+                
+            </Rectangle>
+
         </Canvas>
+        
+        
     </Grid>
 
 </Window>

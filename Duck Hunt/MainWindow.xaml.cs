@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +15,8 @@ namespace Duck_Hunt
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         // Create an instance of several variables which we will use throughout the whole class.
         public static Image empty = new Image();
         public static int Mode = 0;
@@ -99,8 +103,8 @@ namespace Duck_Hunt
                 DuckClick, // Click event handler
                 GameBg, // Parent canvas
                 Behaviour.Duck, // AI function that makes it move/change sprites
-                10 // Interval (in milliseconds) between calls to above AI function
-            ) { Position = Tuple.Create(0, 0), Priority = 0 }; // Define initial properties of this duck
+                20 // Interval (in milliseconds) between calls to above AI function
+            ) { Position = Tuple.Create(350, 350), Priority = 0 }; // Define initial properties of this duck
         }
 
         private void EnterGame1(object sender, System.Windows.Input.MouseButtonEventArgs e) { GameStart(1); } // Different modes
@@ -111,8 +115,35 @@ namespace Duck_Hunt
 
         private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            throw new System.NotImplementedException();
+        }
+
+        private void Shoot(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
             // bang
-            // code for successful shot goes here
+            // code for maybe successful shot goes here
+            BackgroundWorker UIUpdater = new BackgroundWorker();
+
+            UIUpdater.WorkerSupportsCancellation = true;
+            UIUpdater.WorkerReportsProgress = true;
+
+            MuzzleFlash.Visibility = Visibility.Visible;
+
+            UIUpdater.DoWork += new DoWorkEventHandler(UI_DoWork);
+            UIUpdater.RunWorkerCompleted += new RunWorkerCompletedEventHandler(cancelUIUpdate);
+            UIUpdater.RunWorkerAsync();
+        }
+
+        private void UI_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Thread.Sleep(250);
+        }
+
+
+        private void cancelUIUpdate(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MuzzleFlash.Visibility = Visibility.Collapsed;
+            this.InvalidateVisual();  
         }
     }
 }
