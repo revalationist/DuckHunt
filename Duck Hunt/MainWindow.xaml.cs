@@ -55,7 +55,13 @@ namespace Duck_Hunt
              Believe me, I've spent hours trying to figure out why, to no end.
              So you might think: why not just add an empty value in class initialization so that it's less ugly?
              Well, if I do that it's starts ignoring a *different* value! I still have no idea why that happens, either.
-             So then I tried putting the empty part in different places, which didn't help as now it was displaying an empty image. */
+             So if I did that, it was displaying an empty image. 
+             
+             This is the only way to make it work properly. It was much easier to just swallow my pride and do this,
+             rather than figure out why it's actually broken. It even uses the correct number values to index, or at least
+             according to the tracepoint. So I was stumped, and still am, regarding this issue.
+             
+             */
 
             DuckSprites.Add(main.CropSpriteFrom(
                 Tuple.Create(399*2, 172*2), // Start
@@ -123,6 +129,11 @@ namespace Duck_Hunt
         private void DuckClick(object sender, MouseButtonEventArgs e)
         {
         }
+
+        /* 
+         * N.B. Both DuckClick and Shoot get triggered when the player clicks, provided they clicked on a duck.
+         * Shoot is only for cosmetic purposes (i.e. muzzle flash), it does not denote a 'miss' or anything like that.
+         * DuckClick is the method we will use to handle a successful shot. */
 
         private void Shoot(object sender, MouseButtonEventArgs e)
         {
