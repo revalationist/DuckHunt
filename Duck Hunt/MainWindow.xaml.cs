@@ -35,19 +35,7 @@ namespace Duck_Hunt
 
             // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance)
 
-            Image source = new Image();
-            BitmapImage tmp = new BitmapImage();
-            tmp.BeginInit();
-            tmp.UriSource = new Uri(@"../../Resources/sheetx3.png", UriKind.Relative);
-                // The amount of hoops you have to jump through to get a uri into an Image control (programmatically) is appaling
-            tmp.EndInit();
-
-            source.Stretch = Stretch.Fill;
-            source.Source = tmp;
-
-            SpriteSheet main = new SpriteSheet(source);
-                // Instance the spritesheet so now we can use its extension methods.
-
+            SpriteSheet main = new SpriteSheet(this.Spritesheet); // I'm sorry for hiding it in the window, but the other methods of loading it were really complicated
 
             DuckSprites.Add(Empty);
 
