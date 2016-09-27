@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -92,7 +93,7 @@ namespace Duck_Hunt
                 DuckClick, // Click event handler
                 GameBg, // Parent canvas
                 Behaviour.Duck, // AI function that makes it move/change sprites
-                10 // Interval (in milliseconds) between calls to above AI function
+                1 // Interval (in milliseconds) between calls to above AI function
             ) { Position = Tuple.Create(0, 100), Priority = 0 }; // Define initial properties of this duck
         }
 
@@ -106,5 +107,9 @@ namespace Duck_Hunt
 
         private void DuckClick(object sender, System.Windows.Input.MouseButtonEventArgs e) { throw new System.NotImplementedException(); }
 
+        private void Shoot(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+           
+        }
     }
 }

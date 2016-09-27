@@ -42,3 +42,16 @@ F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Debug\MainWindow.baml
 F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Debug\Duck Hunt.g.resources
 F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Debug\Duck_Hunt.Properties.Resources.resources
 F:\Users\jay0\Desktop\DuckHunt\Duck Hunt\obj\Debug\Duck Hunt.csproj.GenerateResource.Cache
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\bin\Debug\Duck Hunt.exe.config
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt.exe
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt.pdb
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\bin\Debug\Duck Hunt.exe
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\bin\Debug\Duck Hunt.pdb
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\MainWindow.g.cs
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\App.g.cs
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt_MarkupCompile.cache
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt_MarkupCompile.lref
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\MainWindow.baml
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt.g.resources
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck_Hunt.Properties.Resources.resources
+\\MEA-2011INTAKE\Mal1175J\Documents\DuckHunt-master\Duck Hunt\obj\Debug\Duck Hunt.csproj.GenerateResource.Cache
