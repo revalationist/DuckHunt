@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Duck_Hunt"
         mc:Ignorable="d"
         RenderOptions.BitmapScalingMode="NearestNeighbor"
-        Title="MainWindow" Height="721" Width="769" ResizeMode="NoResize" MouseDown="Shoot">
+        Title="MainWindow" Height="721" Width="769" ResizeMode="NoResize">
 
     <Grid>
         <Canvas x:Name="MainMenu">
@@ -46,17 +46,6 @@
             <Image x:Name="Bush" UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Left="575" Canvas.Top="326" Source="Resources/bush.png" Stretch="None"/>
             <Image x:Name="Grass" Canvas.ZIndex="10"  UseLayoutRounding="True" SnapsToDevicePixels="True" Canvas.Top="420"  Source="Resources/reeds.png" Canvas.Left="-30" Stretch="None"/>
         </Canvas>
-
-        <Rectangle x:Name="flashRectangle" Visibility="Hidden"  Fill="White" Canvas.Left="585" Canvas.Top="430" RenderTransformOrigin="0.5,0.5" Margin="-52,-80,-30,-58">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.75"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
     </Grid>
 
 </Window>

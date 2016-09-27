@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+
+using System.Windows.Media;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Xml;
 
 // Transformation methods and such to make my life easier.
 // Scale factor 3
@@ -33,9 +38,7 @@ namespace Duck_Hunt
 
 
 
-    public abstract class GameImageObj 
-        // This class is abstract since there is no need to instance it, due to the fact that it's more or less an easier-to-use System.Controls.Image
-        // It simply exists to reduce the bloat in Sprite.
+    public abstract class GameImageObj
     {
         public MainWindow Instance { get; private set; }
         public Image Img { get; set; }
@@ -134,8 +137,6 @@ namespace Duck_Hunt
     }
 
     public class Sprite : GameImageObj // Inherit from the base image object, which defined such paramaters as the core image and position
-                                       // Unlike GameImageObj, this isn't abstract as I may use it to make a crosshair, which does not need AISprite's additional capabilities
-                                       // as it relies solely on user input (i.e. it doesn't need to think for itself)
     {
         public List<Image> frames { get; private set; }
         
@@ -193,24 +194,23 @@ namespace Duck_Hunt
             this.Img.Source = this.frames[1].Source;
         }
 
-        // I guess I could make an overload that has a response to clicking but no animation, however I don't see a need for that.
-
-    } 
+    } // Unlike GameImageObj, this isn't abstract as I may use it without AI to make a crosshair.
 
 
     public class AISprite : Sprite // A class that builds on Sprite to provide more advanced AI functions.
     {
-        // Various class properties that we define early so we can reference outside of the struct
+
         public Func<AISprite, int> OnDeath { get; set; }
+   
         public Timer Timer = new Timer();
+
         private bool _dead;
 
         public Tuple<int, int> MovementDirection { get; set; }
         public int counter { get; set; }
         public int spriteIndex { get; set; }
-        public int spriteIncrement = 1; 
-        // So here we have a few variables to use when we only have a Timer and a Sprite in Behaviour.cs.
-        // Since we could be talking about any sprite, values defined inside functions of Behaviour.Duck could be referring to anything.
+        public int spriteIncrement = 1; // So here we have a few variables to use when we only have a Timer and a Sprite in Behaviour.cs.
+        // Since we could be talking about any sprite, values defined in Behaviour.Duck could be anything.
         // I've added these to make them personalized to the sprites:
         /*
          * MovementDirection = used in Behaviour.Duck to see how much the sprite should move every tick. We change this when, for example, we hit one of the window borders.
@@ -226,10 +226,13 @@ namespace Duck_Hunt
 
         public bool Dead
         {
-            get { return _dead; }
+            get
+            {
+                return _dead;
+            }
             set
             {
-                _dead = value; // update backing field
+                _dead = value;
 
                 if (value == true) // if we're now dead
                 {
@@ -240,10 +243,9 @@ namespace Duck_Hunt
             }
         }
 
-        // Had a lot of operations needed at the start of this class given the amount of work needed to get a timer running.
-        // Because we were using overloads, it's easier to pack this into a simple function rather than copy and paste it a number of times.
 
-        private void init(ElapsedEventHandler ai, int update) 
+        private void init(ElapsedEventHandler ai, int update) // Had a lot of operations needed at the start of this class given the amount of work needed to get a timer running.
+            // Because we were using overloads, it's easier to pack this into a simple function rather than copy and paste it a number of times.
         {
             Behaviour.Parents[Timer] = this;
             //Timer aTimer = new System.Timers.Timer();
@@ -255,7 +257,7 @@ namespace Duck_Hunt
             counter = 0;
             spriteIndex = 0;
 
-            MovementDirection = Tuple.Create(3, 3);
+            MovementDirection = Tuple.Create(1, 0);
         }
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update) 
@@ -266,7 +268,9 @@ namespace Duck_Hunt
             init(ai, update);
         }
 
-        public AISprite(List<Image> sprites , MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, Func<AISprite, int> onDeathMethod) 
+        public AISprite(List<Image> sprites , MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai, int update, 
+            Func<AISprite, int> onDeathMethod) 
+
             // overload 2, we use this for ducks, because they need to do something when they die
             // (change the animation and award the player points)
            : base(sprites, eventHandler, parent)

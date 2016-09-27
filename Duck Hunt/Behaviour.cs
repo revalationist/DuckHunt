@@ -15,15 +15,13 @@ namespace Duck_Hunt
         public static int w = 769; // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
         public static int h = 721; // Having defs here makes it easier to evaluate border conditions
         // because I don't have to access the MainWindow instance and deal with threads, it should also be faster.
-        public static int DuckSpeed = 3;
-
 
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
         public static void Duck(object sender, ElapsedEventArgs e)
         {
             AISprite entity = Parents[sender as Timer]; // we don't need any if(frames != null); this function is for a duck which is always animated.
-            if (entity.counter > 8)
+            if (entity.counter > entity.Timer.Interval)
             {
                 entity.counter = 0;
 
@@ -61,19 +59,10 @@ namespace Duck_Hunt
 
             /* The below is currently just example AI behaviour. It will be improved soon */
 
-            /*if (entity.Position.Item2 < 0 || entity.Position.Item2 + entity.Img.ActualWidth > 450) // check if we hit the right wall of the window. We're only moving on X for now,
-                { entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, entity.MovementDirection.Item2 *-1); } // so that's all that's needed.
-            if (entity.Position.Item1 < 0 || entity.Position.Item1 + entity.Img.ActualWidth > w)
-                { entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1 * -1, entity.MovementDirection.Item2); } // Same goes if we hit the left wall.*/
-
-            if (entity.Position.Item2 < 0) { entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, DuckSpeed); }
-            if (entity.Position.Item2 > 400) { entity.MovementDirection = Tuple.Create(entity.MovementDirection.Item1, -DuckSpeed); }
-
-            if (entity.Position.Item1 < 0) { entity.MovementDirection = Tuple.Create(DuckSpeed, entity.MovementDirection.Item2); }
-            if (entity.Position.Item1 > w - entity.Img.ActualWidth) { entity.MovementDirection = Tuple.Create(-DuckSpeed, entity.MovementDirection.Item2); }
-
-            
-
+            if (entity.Position.Item1 + entity.Img.ActualWidth > w) // check if we hit the right wall of the window. We're only moving on X for now,
+                { entity.MovementDirection = Tuple.Create(-1, 0); } // so that's all that's needed.
+            if (entity.Position.Item1 < 0)
+                { entity.MovementDirection = Tuple.Create(1, 0); } // Same goes if we hit the left wall.
 
             entity.counter++; // Finally, increase the counter (for operations above such as changing the sprite occasionally
         }
