@@ -21,6 +21,8 @@ namespace Duck_Hunt
         public static Dictionary<string, Image> Sprites;
         public static List<Image> DuckSprites = new List<Image>();
         public Player Player = new Player();
+        public Random RNG = new Random();
+        public Interface gameInterface;
 
 
         public MainWindow()
@@ -81,6 +83,8 @@ namespace Duck_Hunt
 
             #endregion
 
+            gameInterface = new Interface(main, this.GameBg);
+
 
         }
 
@@ -111,7 +115,7 @@ namespace Duck_Hunt
                 DuckSprites, // List of sprites to animate with
                 DuckClick, // Click event handler
                 GameBg, // Parent canvas
-                Behaviour.Duck, // AI function that makes it move/change sprites
+                Behaviour.DuckFlyUp, // AI function that makes it move/change sprites
                 20 // Interval (in milliseconds) between calls to above AI function
             ) {Position = Tuple.Create(350, 350), Priority = 0}; // Define initial properties of this duck
         }
@@ -142,6 +146,7 @@ namespace Duck_Hunt
 
         private void Shoot(object sender, MouseButtonEventArgs e)
         {
+            Player.Bullets--;
             // bang
             // code for maybe successful shot goes here
             BackgroundWorker UpdateUI = new BackgroundWorker // Define a new worker which will wait for us.
@@ -154,6 +159,7 @@ namespace Duck_Hunt
              * the UI threa; which may still be paused when it comes time to make the flash
              * invisible once again.
              *  */
+            
 
             MuzzleFlash.Visibility = Visibility.Visible; // First make our flash visible
 
@@ -164,7 +170,7 @@ namespace Duck_Hunt
 
         private static void UI_DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(250); // ...wait
+            Thread.Sleep(75); // ...wait
         }
 
 

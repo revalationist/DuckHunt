@@ -38,7 +38,7 @@ namespace Duck_Hunt
 
         private int _priority;
 
-        protected GameImageObj(Image i, Canvas parent) // struct
+        public GameImageObj(Image i, Canvas parent) // struct
         {
             Img = i; // Set the source image object
             parent.Children.Add(Img); // Add it to the canvas to make sure it displays

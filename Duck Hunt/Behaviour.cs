@@ -17,11 +17,11 @@ namespace Duck_Hunt
 
         public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
 
-        public static void Duck(object sender, ElapsedEventArgs e)
+        public static void DuckFlyUp(object sender, ElapsedEventArgs e)
         {
             AISprite entity = Parents[sender as Timer];
             // we don't need any if(frames != null); this function is for a duck which is always animated.
-            if (entity.Counter > 5)
+            if (entity.Counter > 1)
             {
                 entity.Counter = 0;
 
@@ -36,7 +36,7 @@ namespace Duck_Hunt
                 // The following if statements create this sequence by preventing the index from causing out of range errors, such as if it
                 // were to go to -1 or 7 in the case of a list of last index 6. 
 
-                if ((entity.SpriteIndex >= entity.Frames.Count - 1) && (entity.SpriteIncrement > 0))
+                if ((entity.SpriteIndex >= 3) && (entity.SpriteIncrement > 0))
                     entity.SpriteIncrement = -1;
                 if ((entity.SpriteIndex <= 0) && (entity.SpriteIncrement < 0))
                     entity.SpriteIncrement = 1;
@@ -76,3 +76,7 @@ namespace Duck_Hunt
         }
     }
 }
+
+/* The actual behaviour: they fly up for a random amount of time, then start flying side to side, bobbing in the process.
+ * Plan: have it fly up for a randomly generated number of ticks, then generate a random sine/cosine graph for it to follow as it flies.
+ * If a random number is met while flying sideways, it will divert and go in the other direction */

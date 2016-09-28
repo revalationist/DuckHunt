@@ -3,28 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Duck_Hunt
 {
-    class Interface
+    public class Interface
     {
         // Basic elements
-        public Image AmmoGaugeBG;
-        public Image HitBG;
-        public Image ScoreBG;
+        public GameImageObj AmmoGaugeBG;
+        public GameImageObj HitBG;
+        public GameImageObj ScoreBG;
         
         // Notifications
-        public Image Pause;
-        public Image FlyAway;
+        public GameImageObj Pause;
+        public GameImageObj FlyAway;
 
         // Icons
-        public Image Bullet;
-        public Image WhiteDuck;
+        public GameImageObj Bullet;
+        public GameImageObj WhiteDuck;
 
-        public Interface(SpriteSheet src)
+        // Static labels
+        public GameImageObj Shot;
+
+        public Interface(SpriteSheet src, Canvas parent)
         {
-            // do something
+            HitBG = new GameImageObj(
+                src.CropSpriteFrom(Tuple.Create(183, 615), Tuple.Create(351, 63)),
+                parent)
+            {
+                Position = Tuple.Create(183, 585),
+                Priority = 40000
+            };
+
+            AmmoGaugeBG = new GameImageObj(
+                src.CropSpriteFrom(Tuple.Create(63, 615), Tuple.Create(87, 63)),
+                parent)
+            {
+                Position = Tuple.Create(63, 585),
+                Priority = 1337
+            };
+
+            Shot = new GameImageObj(
+                src.CropSpriteFrom(Tuple.Create(174, 762), Tuple.Create(63, 18)),
+                parent)
+            {
+                Position = Tuple.Create(75, 620),
+                Priority = 1338
+            };
+
         }
     }
 }
