@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 // Transformation methods and such to make my life easier.
-// Scale factor 3
 
 namespace Duck_Hunt
 {
@@ -32,13 +31,12 @@ namespace Duck_Hunt
     // Seeing as you can't define fields in an interface, they were deprecated.
 
 
-    public abstract class GameImageObj
+    public class GameImageObj // Used for interfaces
     {
-        private Tuple<int, int> _position; // backing field, see above explanation.
+        private Tuple<int, int> _position;  // Backing field: if you try and use a get; set; accessor without using the default (which generates this for you)
+                                            // you will find a neat example of recursion in your get statement, which causes a stackoverflow
 
         private int _priority;
-            // Backing field: if you try and use a get; set; accessor without using the default (which generates this for you)
-
 
         protected GameImageObj(Image i, Canvas parent) // struct
         {
@@ -51,8 +49,7 @@ namespace Duck_Hunt
         public MainWindow Instance { get; protected set; }
         public Image Img { get; set; }
         public Canvas Parent { get; set; }
-        // then you end up with recursion on 'get { return Priority }', as 'return priority' will reference its own get accessor, causing a Stack Overflow
-        // which, by the way, are very hard to google solutions for because of a certain website
+        
         public int Priority
         {
             get { return _priority; }
@@ -89,7 +86,7 @@ namespace Duck_Hunt
         }
     }
 
-    internal class SpriteSheet
+    public class SpriteSheet
     {
         public SpriteSheet(Image input) // Struct, simply define an image to modify and a size to check input against.
         {
@@ -152,7 +149,8 @@ namespace Duck_Hunt
         } 
         * Could not get resize to work due to some issues with Image.Width behaving weirdly and giving me NaN or -2147m, for some reason.
         * Image.ActualWidth was always 0 as well.
-        * So I decided to instead resize images in external programs to bring to an acceptable res for a 1080p screen. That should also be faster if things are pre-computed.
+        * So I decided to instead resize images in external programs to bring to an acceptable res for a 1080p screen. That should also be faster 
+        
              */
 
 
@@ -187,7 +185,7 @@ namespace Duck_Hunt
         {
             Position = Position.Add(offset);
         }
-    } // Unlike GameImageObj, this isn't abstract as I may use it without AI to make a crosshair.
+    } 
 
 
     public class AISprite : Sprite // A class that builds on Sprite to provide more advanced AI functions.

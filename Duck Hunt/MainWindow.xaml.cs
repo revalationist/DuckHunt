@@ -20,6 +20,8 @@ namespace Duck_Hunt
         public static int Mode;
         public static Dictionary<string, Image> Sprites;
         public static List<Image> DuckSprites = new List<Image>();
+        public Player Player = new Player();
+
 
         public MainWindow()
         {
@@ -30,8 +32,18 @@ namespace Duck_Hunt
 
         private void Ready(object sender, EventArgs e)
         {
+            
+
             GameBg.Visibility = Visibility.Collapsed;
             //MainMenu.Visibility = Visibility.Collapsed;
+
+            #region ReadyPlayerOne
+
+            
+
+            #endregion
+
+            #region Sprites - Duck
 
             // Cropping sprites, we use a spritesheet as it saves storage space and increases the reliability of the program (single images can't go missing for instance)
 
@@ -52,8 +64,8 @@ namespace Duck_Hunt
              */
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(399*2, 172*2), // Duck frame 1 (alive, moving)
-                Tuple.Create(40*2, 47*2)
+                Tuple.Create(399 * 2, 172 * 2), // Duck frame 1 (alive, moving)
+                Tuple.Create(40 * 2, 47 * 2)
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
@@ -65,6 +77,11 @@ namespace Duck_Hunt
                 Tuple.Create(991, 351), // Duck frame 3 (alive, moving)
                 Tuple.Create(77, 93)
             ));
+
+
+            #endregion
+
+
         }
 
         private void MenuOptionMEnter(object sender, MouseEventArgs e)
