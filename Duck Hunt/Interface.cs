@@ -22,6 +22,10 @@ namespace Duck_Hunt
         // Icons
         public GameImageObj Bullet;
         public GameImageObj WhiteDuck;
+        public GameImageObj[] Bullets;
+        public GameImageObj Bullet1;
+        public GameImageObj Bullet2;
+        public GameImageObj Bullet3;
 
         // Static labels
         public GameImageObj Shot;
@@ -50,6 +54,15 @@ namespace Duck_Hunt
             {
                 Position = Tuple.Create(75, 620),
                 Priority = 1338
+            };
+
+            Bullet1 = new GameImageObj(src.CropSpriteFrom(Tuple.Create(177, 735), Tuple.Create(12, 21)), parent) { Position = Tuple.Create(78, 593), Priority = 1339 };
+            Bullet2 = new GameImageObj(src.CropSpriteFrom(Tuple.Create(177, 735), Tuple.Create(12, 21)), parent) { Position = Tuple.Create(78+23, 593), Priority = 1340};
+            Bullet3 = new GameImageObj(src.CropSpriteFrom(Tuple.Create(177, 735), Tuple.Create(12, 21)), parent) { Position = Tuple.Create(78+23+23, 593), Priority = 1341};
+
+            Bullets = new GameImageObj[3]
+            {
+                Bullet1, Bullet2, Bullet3
             };
 
         }

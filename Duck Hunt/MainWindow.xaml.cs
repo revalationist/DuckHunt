@@ -146,10 +146,15 @@ namespace Duck_Hunt
 
         private void Shoot(object sender, MouseButtonEventArgs e)
         {
+           
+            if (Player.Bullets > 0)
+                this.gameInterface.Bullets[Player.Bullets-1].Img.Visibility = Visibility.Hidden;
+            else
+                return;
+
             Player.Bullets--;
-            // bang
-            // code for maybe successful shot goes here
-            BackgroundWorker UpdateUI = new BackgroundWorker // Define a new worker which will wait for us.
+    
+            BackgroundWorker UpdateUI = new BackgroundWorker // Define a new worker which do waiting for us.
             {
                 WorkerSupportsCancellation = true, 
                 WorkerReportsProgress = true       
