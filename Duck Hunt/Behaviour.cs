@@ -134,7 +134,16 @@ namespace Duck_Hunt
                    DispatcherPriority.Background,
                    new Action(() => { entity.Img.Source = entity.Frames[entity.SpriteIndex].Source; }));
                 
-                entity.Move(Tuple.Create(0, 3));
+                if (entity.Position.Item2 < Height) { entity.Move(Tuple.Create(0, 3)); }
+            }
+
+            if (entity.Position.Item2 > Height)
+            {
+                entity.Timer.Stop();
+                entity.Timer.Enabled = false;
+                
+
+
             }
         }
     }
