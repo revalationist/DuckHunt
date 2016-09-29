@@ -80,19 +80,47 @@ namespace Duck_Hunt
 
         public static int DuckDeath(AISprite entity)
         {
-            entity.Timer.Elapsed -= new ElapsedEventHandler(Behaviour.DuckFlyUp);
-            entity.Timer.Elapsed += new ElapsedEventHandler(Behaviour.DuckDie);
+            entity.Timer.Elapsed -= new ElapsedEventHandler(DuckFlyUp);
+            entity.Timer.Elapsed += new ElapsedEventHandler(DuckDie);
+            entity.Timer.Enabled = true;
+            entity.Timer.Start();
             return 0;
         }
 
         public static void DuckDie(object sender, ElapsedEventArgs e)
         {
+            
             Timer theTimer = sender as Timer;
             AISprite entity = AIByTimer[theTimer];
 
+            entity.Counter++;
+
             int elapsed = Convert.ToInt32(entity.Counter*theTimer.Interval);
 
-
+            if (elapsed < 1000)
+            {
+                Application.Current?.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background,
+                    new Action(() => { entity.Img.Source = entity.Frames[4].Source; }));
+                
+            }
+            if (elapsed > 1000)
+            {
+                if (elapsed%4 == 0)
+                {
+                    Application.Current?.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Background,
+                        new Action(() => { entity.Img.Source = entity.Frames[5].Source; }));
+                    
+                }
+                else
+                {
+                    Application.Current?.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Background,
+                        new Action(() => { entity.Img.Source = entity.Frames[6].Source; }));
+                }
+                entity.Move(Tuple.Create(0, 3));
+            }
         }
     }
 

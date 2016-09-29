@@ -63,44 +63,43 @@ namespace Duck_Hunt
              This is the only way to make it work properly. It was much easier to just swallow my pride and do this,
              rather than figure out why it's actually broken. It even uses the correct number values to index, or at least
              according to the tracepoint. So I was stumped, and still am, regarding this issue.
-             
-             */
-
-            // red top: 474
-            // blue top: 603
-            // green top 345
-
-            // sorted: 
-            //  green: 345
-            //  red: 474
-            //  blue: 603
-
-            // -345
-            // green: 0
-            // red: 129
-            // blue: 258
-
-            // -129
-            // 0
-            // 129
+    */
 
             // Roll for duck colour
             int vPixelValue = 345 + 129*(RNG.Next(0, 3)); // Generate a number from 0 to 2
+            Tuple<int, int> SpriteSize = Tuple.Create(93, 93);
 
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(798, vPixelValue), // Duck frame 1 (alive, moving)
-                Tuple.Create(40 * 2, 47 * 2)
+                Tuple.Create(795, vPixelValue), // Duck frame 1 (alive, moving)
+                SpriteSize
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(891, vPixelValue), // Duck frame 2 (alive, moving)
-                Tuple.Create(96, 87)
+                Tuple.Create(887, vPixelValue), // Duck frame 2 (alive, moving)
+                SpriteSize
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(991, vPixelValue), // Duck frame 3 (alive, moving)
-                Tuple.Create(77, 93)
+                Tuple.Create(987, vPixelValue), // Duck frame 3 (alive, moving)
+                SpriteSize
+            ));
+
+            // Add dead sprites at indexes >=4
+
+            DuckSprites.Add(main.CropSpriteFrom(
+                Tuple.Create(1446, vPixelValue+25), // Dead frame 1
+                Tuple.Create(93, 87)
+            ));
+
+            DuckSprites.Add(main.CropSpriteFrom(
+                Tuple.Create(1563, vPixelValue+13), // Dead frame 2 (falling 1)
+                Tuple.Create(54, 99) // Unfortunately we can't use a fixed size here as this sprite is close to others in the sheet
+            ));
+
+            DuckSprites.Add(main.CropSpriteFrom(
+                Tuple.Create(1647, vPixelValue + 13), // Dead frame 2 (falling 1)
+                Tuple.Create(54, 99) // Unfortunately we can't use a fixed size here as this sprite is close to others in the sheet
             ));
 
 
@@ -139,9 +138,11 @@ namespace Duck_Hunt
                 DuckClick, // Click event handler
                 GameBg, // Parent canvas
                 Behaviour.DuckFlyUp, // AI function that makes it move/change sprites
-                20, // Interval (in milliseconds) between calls to above AI function
-                Behaviour.DuckDeath
+                20 // Interval (in milliseconds) between calls to above AI function
+                
             ) {Position = Tuple.Create(350, 350), Priority = 0}; // Define initial properties of this duck
+
+            duck.OnDeath = () => Behaviour.DuckDeath(duck);
         }
 
         private void EnterGame1(object sender, MouseButtonEventArgs e)
@@ -164,6 +165,7 @@ namespace Duck_Hunt
             if (Player.Bullets > 0)
             {
                 AISprite entity = Behaviour.AIByImage[sender as Image];
+                Behaviour.DuckDeath(entity);
                 entity.Dead = true;
             }
 

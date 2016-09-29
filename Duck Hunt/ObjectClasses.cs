@@ -199,27 +199,15 @@ namespace Duck_Hunt
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai,
                 int update)
-            // overload 1, if we don't want our sprite to have a reaction to death
-            // usually meaning it can't die, e.g. the dog
-            : base(sprites, eventHandler, parent)
-        {
-            _init(ai, update, sprites);
-            
-        }
-
-        public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai,
-                int update,
-                Func<AISprite, int> onDeathMethod)
             // overload 2, we use this for ducks, because they need to do something when they die
             // (change the animation and award the player points)
             : base(sprites, eventHandler, parent)
         {
             _init(ai, update, sprites);
 
-            OnDeath = onDeathMethod;
         }
 
-        public Func<AISprite, int> OnDeath { get; set; }
+        public Action OnDeath { get; set; }
 
         public Tuple<int, int> MovementDirection { get; set; }
         public int Counter { get; set; }
@@ -247,8 +235,8 @@ namespace Duck_Hunt
 
                 if (value) // if we're now dead
                 {
-                    OnDeath(this);
-                    this.Timer.Elapsed -= new ElapsedEventHandler(Behaviour.DuckFlyUp);
+                    OnDeath();
+                    
                     this.Counter = 0;
                     this.SpriteIndex = 0;
                     //RIP
