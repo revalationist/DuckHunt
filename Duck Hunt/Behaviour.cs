@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -102,23 +103,37 @@ namespace Duck_Hunt
                 Application.Current?.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background,
                     new Action(() => { entity.Img.Source = entity.Frames[4].Source; }));
-                
+                entity.SpriteIndex = 4;
+
             }
             if (elapsed > 1000)
             {
-                if (elapsed%4 == 0)
+                if (entity.SpriteIndex == 4)
                 {
-                    Application.Current?.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Background,
-                        new Action(() => { entity.Img.Source = entity.Frames[5].Source; }));
+                    entity.SpriteIndex = 5;
+                }
+
+                if (entity.Counter%10 == 0)
+                {
+                    switch (entity.SpriteIndex)
+                    {
+                        case 4:
+                            entity.SpriteIndex = 5;
+                            break;
+                        case 5:
+                            entity.SpriteIndex = 6;
+                            break;
+                        case 6:
+                            entity.SpriteIndex = 5;
+                            break;
+                    }
+
                     
                 }
-                else
-                {
-                    Application.Current?.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Background,
-                        new Action(() => { entity.Img.Source = entity.Frames[6].Source; }));
-                }
+                Application.Current?.Dispatcher.BeginInvoke(
+                   DispatcherPriority.Background,
+                   new Action(() => { entity.Img.Source = entity.Frames[entity.SpriteIndex].Source; }));
+                
                 entity.Move(Tuple.Create(0, 3));
             }
         }
