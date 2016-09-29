@@ -66,18 +66,40 @@ namespace Duck_Hunt
              
              */
 
+            // red top: 474
+            // blue top: 603
+            // green top 345
+
+            // sorted: 
+            //  green: 345
+            //  red: 474
+            //  blue: 603
+
+            // -345
+            // green: 0
+            // red: 129
+            // blue: 258
+
+            // -129
+            // 0
+            // 129
+
+            // Roll for duck colour
+            int vPixelValue = 345 + 129*(RNG.Next(0, 3)); // Generate a number from 0 to 2
+
+
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(399 * 2, 172 * 2), // Duck frame 1 (alive, moving)
+                Tuple.Create(798, vPixelValue), // Duck frame 1 (alive, moving)
                 Tuple.Create(40 * 2, 47 * 2)
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(891, 351), // Duck frame 2 (alive, moving)
+                Tuple.Create(891, vPixelValue), // Duck frame 2 (alive, moving)
                 Tuple.Create(96, 87)
             ));
 
             DuckSprites.Add(main.CropSpriteFrom(
-                Tuple.Create(991, 351), // Duck frame 3 (alive, moving)
+                Tuple.Create(991, vPixelValue), // Duck frame 3 (alive, moving)
                 Tuple.Create(77, 93)
             ));
 

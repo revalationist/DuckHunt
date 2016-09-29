@@ -18,11 +18,11 @@ namespace Duck_Hunt
         // because I don't have to access the MainWindow instance and deal with threads, it should also be faster.
         public static readonly int DuckSpeed = 9;
 
-        public static Dictionary<Timer, AISprite> Parents = new Dictionary<Timer, AISprite>();
+        public static Dictionary<Timer, AISprite> AIByTimer = new Dictionary<Timer, AISprite>();
 
         public static void DuckFlyUp(object sender, ElapsedEventArgs e)
         {
-            AISprite entity = Parents[sender as Timer];
+            AISprite entity = AIByTimer[sender as Timer];
             // we don't need any if(frames != null); this function is for a duck which is always animated.
             if (entity.Counter > 1)
             {
@@ -87,6 +87,11 @@ namespace Duck_Hunt
 
         public static void DuckDie(object sender, ElapsedEventArgs e)
         {
+            Timer theTimer = sender as Timer;
+            AISprite entity = AIByTimer[theTimer];
+
+            int elapsed = Convert.ToInt32(entity.Counter*theTimer.Interval);
+
 
         }
     }

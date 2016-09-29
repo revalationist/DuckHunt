@@ -249,6 +249,8 @@ namespace Duck_Hunt
                 {
                     OnDeath(this);
                     this.Timer.Elapsed -= new ElapsedEventHandler(Behaviour.DuckFlyUp);
+                    this.Counter = 0;
+                    this.SpriteIndex = 0;
                     //RIP
                 }
             }
@@ -259,7 +261,7 @@ namespace Duck_Hunt
             // Had a lot of operations needed at the start of this class given the amount of work needed to get a timer running.
             // Because we were using overloads, it's easier to pack this into a simple function rather than copy and paste it a number of times.
         {
-            Behaviour.Parents[Timer] = this;
+            Behaviour.AIByTimer[Timer] = this;
             foreach (Image i in sprites)
             {
                 Behaviour.AIByImage[i] = this;
