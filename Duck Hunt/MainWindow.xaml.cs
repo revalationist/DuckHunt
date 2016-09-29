@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -116,7 +117,8 @@ namespace Duck_Hunt
                 DuckClick, // Click event handler
                 GameBg, // Parent canvas
                 Behaviour.DuckFlyUp, // AI function that makes it move/change sprites
-                20 // Interval (in milliseconds) between calls to above AI function
+                20, // Interval (in milliseconds) between calls to above AI function
+                Behaviour.DuckDeath
             ) {Position = Tuple.Create(350, 350), Priority = 0}; // Define initial properties of this duck
         }
 
@@ -137,6 +139,12 @@ namespace Duck_Hunt
 
         private void DuckClick(object sender, MouseButtonEventArgs e)
         {
+            if (Player.Bullets > 0)
+            {
+                AISprite entity = Behaviour.AIByImage[sender as Image];
+                entity.Dead = true;
+            }
+
         }
 
         /* 

@@ -203,7 +203,8 @@ namespace Duck_Hunt
             // usually meaning it can't die, e.g. the dog
             : base(sprites, eventHandler, parent)
         {
-            _init(ai, update);
+            _init(ai, update, sprites);
+            
         }
 
         public AISprite(List<Image> sprites, MouseButtonEventHandler eventHandler, Canvas parent, ElapsedEventHandler ai,
@@ -213,7 +214,7 @@ namespace Duck_Hunt
             // (change the animation and award the player points)
             : base(sprites, eventHandler, parent)
         {
-            _init(ai, update);
+            _init(ai, update, sprites);
 
             OnDeath = onDeathMethod;
         }
@@ -247,18 +248,22 @@ namespace Duck_Hunt
                 if (value) // if we're now dead
                 {
                     OnDeath(this);
-                    Timer.Enabled = false;
+                    this.Timer.Elapsed -= new ElapsedEventHandler(Behaviour.DuckFlyUp);
                     //RIP
                 }
             }
         }
 
 
-        private void _init(ElapsedEventHandler ai, int update)
+        private void _init(ElapsedEventHandler ai, int update, List<Image> sprites)
             // Had a lot of operations needed at the start of this class given the amount of work needed to get a timer running.
             // Because we were using overloads, it's easier to pack this into a simple function rather than copy and paste it a number of times.
         {
             Behaviour.Parents[Timer] = this;
+            foreach (Image i in sprites)
+            {
+                Behaviour.AIByImage[i] = this;
+            }
             //Timer aTimer = new System.Timers.Timer();
             Timer.Elapsed += ai;
             Timer.Interval = update;

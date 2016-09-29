@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Duck_Hunt
 {
     public static class Behaviour
     {
+        public static Dictionary<Image, AISprite> AIByImage = new Dictionary<Image, AISprite>();
+
         public static int Width = 769;
         // So this would normally be bad practice but the window is a fixed size. I have disallowed resizing it.
 
@@ -74,7 +77,21 @@ namespace Duck_Hunt
             entity.Counter++;
             // Finally, increase the counter (for operations above such as changing the sprite occasionally
         }
+
+        public static int DuckDeath(AISprite entity)
+        {
+            entity.Timer.Elapsed -= new ElapsedEventHandler(Behaviour.DuckFlyUp);
+            entity.Timer.Elapsed += new ElapsedEventHandler(Behaviour.DuckDie);
+            return 0;
+        }
+
+        public static void DuckDie(object sender, ElapsedEventArgs e)
+        {
+
+        }
     }
+
+    
 }
 
 /* The actual behaviour: they fly up for a random amount of time, then start flying side to side, bobbing in the process.
